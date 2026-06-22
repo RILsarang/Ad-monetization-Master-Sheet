@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AJIO Ads — Monetization Dashboard</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0D1520;--s1:#111D2E;--s2:#172238;--s3:#1E2F47;--s4:#253859;
+  --bd:#ffffff12;--bd2:#ffffff1E;--bd3:#ffffff30;
+  --ink:#E8EEF7;--muted:#7A90B0;--hint:#4A607A;
+  --accent:#3D8EF0;--accent2:#5BC8F5;
+  --green:#3ECF8E;--gd:#0D3024;--gt:#1A5C42;
+  --amber:#F5A623;--ad:#2E1F07;--at:#5C3A0D;
+  --red:#F06060;--rd:#2E0D0D;--rt:#5C1A1A;
+  --blue:#3D8EF0;--bd_:#0D1E36;--bt:#1A3660;
+  --teal:#2DD4BF;--td:#0D2B27;
+  --r:8px;--rl:12px;
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:13px;min-height:100vh}
+.hdr{background:var(--s2);border-bottom:1px solid var(--bd);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-size:18px;font-weight:600;letter-spacing:3px;color:#fff}.logo span{color:var(--accent2)}
+.hdr-meta{font-size:10px;color:var(--muted);text-align:right;line-height:1.7}
+.hdr-meta strong{display:block;font-size:12px;color:var(--ink)}
+.live{display:flex;align-items:center;justify-content:flex-end;gap:5px;font-size:10px;color:var(--muted);margin-top:2px}
+.ld{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)88;animation:lp 2s infinite}
+@keyframes lp{0%,100%{opacity:1}50%{opacity:.3}}
+.loading{display:flex;align-items:center;justify-content:center;min-height:60vh;flex-direction:column;gap:16px}
+.spinner{width:36px;height:36px;border:2px solid var(--bd2);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{background:var(--rd);border:1px solid var(--rt);color:var(--red);padding:12px 16px;border-radius:var(--r);font-size:12px;max-width:500px;text-align:center}
+.tabs{background:var(--s1);border-bottom:1px solid var(--bd);display:flex;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:11px 18px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.tab:hover{color:var(--ink)}.tab.on{color:var(--accent2);border-bottom-color:var(--accent2)}
+.tsep{width:1px;height:20px;background:var(--bd);align-self:center;margin:0 6px;flex-shrink:0}
+.ctrl{background:var(--s1);border-bottom:1px solid var(--bd);padding:10px 22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cl{font-size:11px;color:var(--hint);font-weight:500;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase}
+.m-sel{display:flex;background:var(--bg);border:1px solid var(--bd2);border-radius:20px;padding:3px;gap:2px}
+.ms{padding:5px 16px;border-radius:16px;font-size:11px;font-weight:500;cursor:pointer;color:var(--muted);background:none;border:none;transition:all .15s}
+.ms:hover{color:var(--ink)}.ms.on{background:var(--s4);color:var(--accent2);box-shadow:0 0 0 1px #3D8EF044}
+.cb{font-size:11px;padding:5px 14px;border-radius:20px;border:1px solid var(--bd2);background:var(--s2);color:var(--muted);cursor:pointer;transition:all .15s;font-weight:500}
+.cb:hover{border-color:var(--bd3);color:var(--ink)}.cb.on{background:var(--s4);color:var(--accent2);border-color:#3D8EF044}
+.csep{width:1px;height:18px;background:var(--bd);flex-shrink:0}.csp{flex:1}
+.hp{background:var(--s1);border-bottom:1px solid var(--bd);padding:10px 22px;display:none;flex-wrap:wrap;gap:6px}
+.hp-bu{font-size:11px;padding:4px 12px;border-radius:16px;border:1px solid var(--bd2);background:var(--s2);color:var(--muted);cursor:pointer;transition:all .12s;font-weight:500}
+.hp-bu:hover{border-color:var(--bd3);color:var(--ink)}.hp-bu.on{background:var(--s4);color:var(--accent2);border-color:#3D8EF044}
+.pane{display:none;padding:20px;animation:fi .18s ease}.pane.on{display:block}
+@keyframes fi{from{opacity:.3}to{opacity:1}}
+.g5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:20px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.kpi{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rl);padding:14px 16px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);border-radius:var(--rl) var(--rl) 0 0}
+.kpi.g::before{background:var(--green)}.kpi.a::before{background:var(--amber)}.kpi.r::before{background:var(--red)}.kpi.t::before{background:var(--teal)}
+.kl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.kv{font-size:21px;font-weight:500;line-height:1;color:var(--ink)}.ks{font-size:10px;color:var(--muted);margin-top:3px}
+.chip{display:inline-flex;align-items:center;font-size:10px;font-weight:500;padding:3px 9px;border-radius:10px;margin-top:6px}
+.cg{background:var(--gd);color:var(--green);border:1px solid var(--gt)}.ca{background:var(--ad);color:var(--amber);border:1px solid var(--at)}
+.cr{background:var(--rd);color:var(--red);border:1px solid var(--rt)}.cb2{background:var(--bd_);color:var(--blue);border:1px solid var(--bt)}
+.ct2{background:var(--td);color:var(--teal);border:1px solid #1A4A45}
+.card{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rl);padding:16px}
+.ct{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.ctm{font-size:10px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.sh{display:flex;align-items:center;gap:8px;margin:22px 0 11px}
+.sb{width:2px;height:14px;background:var(--accent2);border-radius:2px;flex-shrink:0}
+.st{font-size:12px;font-weight:500;color:var(--ink)}.sr{margin-left:auto}
+.bl{display:flex;flex-direction:column;gap:8px}
+.br{display:flex;align-items:center;gap:8px}
+.blbl{font-size:10px;color:var(--muted);width:115px;flex-shrink:0;text-align:right;line-height:1.3}
+.btrk{flex:1;height:18px;background:var(--bg);border-radius:4px;position:relative;overflow:hidden;border:1px solid var(--bd)}
+.bfil{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:6px;font-size:9px;font-weight:600;color:rgba(255,255,255,.9);min-width:2px}
+.bv{font-size:10px;color:var(--muted);width:42px;text-align:right;flex-shrink:0}
+.brl{display:flex;flex-direction:column;gap:5px}
+.brw{display:flex;align-items:center;gap:6px}
+.bnk{width:16px;font-size:10px;color:var(--hint);text-align:right;flex-shrink:0}
+.bnn{flex:1;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bnt{width:80px;height:5px;background:var(--bg);border-radius:3px;overflow:hidden;flex-shrink:0}
+.bnf{height:100%;border-radius:3px}
+.bna{font-size:10px;font-weight:500;color:var(--ink);width:42px;text-align:right;flex-shrink:0}
+.pill{display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600}
+.pg{background:var(--gd);color:var(--green)}.pa{background:var(--ad);color:var(--amber)}.pr{background:var(--rd);color:var(--red)}.pb{background:var(--bd_);color:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:11px}
+thead th{background:var(--s3);color:var(--muted);padding:8px 10px;font-size:10px;font-weight:500;text-align:right;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid var(--bd2)}
+thead th:first-child{text-align:left}
+tbody tr{border-bottom:1px solid var(--bd);transition:background .1s}
+tbody tr:hover{background:var(--s3)}tbody tr:last-child{border-bottom:none}
+tbody td{padding:7px 10px;text-align:right;color:var(--ink)}tbody td:first-child{text-align:left;font-weight:500}
+tfoot td{background:var(--s3);padding:8px 10px;text-align:right;font-weight:600;color:var(--ink);border-top:1px solid var(--bd2)}
+tfoot td:first-child{text-align:left}
+.exc-t{width:100%;border-collapse:collapse;font-size:11px}
+.exc-t th{background:var(--s3);color:var(--muted);padding:7px 9px;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--bd2)}
+.exc-t th:first-child{text-align:left}
+.exc-t td{padding:7px 9px;border-bottom:1px solid var(--bd);text-align:right;color:var(--ink)}
+.exc-t td:first-child{text-align:left;color:var(--muted)}.exc-t tr:last-child td{border-bottom:none}
+.exc-t .hi{color:var(--green);font-weight:600}.exc-t tr:hover td{background:var(--s3)}
+.ne-t{width:100%;border-collapse:collapse;font-size:11px}
+.ne-t th{background:var(--s3);color:var(--muted);padding:7px 10px;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;text-align:left;border-bottom:1px solid var(--bd2)}
+.ne-t td{padding:8px 10px;border-bottom:1px solid var(--bd);vertical-align:top;color:var(--ink)}.ne-t tr:last-child td{border-bottom:none}.ne-t tr:hover td{background:var(--s3)}
+.src-tag{font-size:9px;padding:1px 6px;border-radius:6px;font-weight:500;margin-left:6px;background:var(--s3);color:var(--muted);border:1px solid var(--bd)}
+.pend{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--hint);background:var(--s3);border:1px dashed var(--bd2);border-radius:var(--r);padding:3px 8px;margin-top:4px}
+.lrow{display:flex;gap:12px;font-size:10px;color:var(--muted);margin-top:8px}
+.leg{display:flex;align-items:center;gap:4px}.lb{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.note{font-size:10px;color:var(--hint);margin-top:6px}
+.spark{display:flex;flex-direction:column}
+.sprow{display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid var(--bd)}
+.sprow:last-child{border-bottom:none}.splbl{font-size:11px;color:var(--muted);flex:1}
+.spv{font-size:11px;font-weight:500;color:var(--ink);width:50px;text-align:right}
+.spdel{font-size:10px;width:44px;text-align:right}
+.tier-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tc{background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:12px;position:relative;overflow:hidden}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.tc.lcs::before{background:var(--accent)}.tc.gr::before{background:var(--green)}.tc.lt::before{background:var(--amber)}
+.mbd{font-size:9px;padding:2px 7px;border-radius:7px;font-weight:500}
+.mbd-a{background:#0D2E1A;color:var(--green);border:1px solid var(--gt)}
+.mbd-m{background:var(--bd_);color:var(--blue);border:1px solid var(--bt)}
+.mbd-j{background:var(--ad);color:var(--amber);border:1px solid var(--at)}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div style="display:flex;align-items:center;gap:14px">
+    <div class="logo">AJ<span>IO</span></div>
+    <div style="width:1px;height:28px;background:var(--bd2)"></div>
+    <div>
+      <div style="font-size:14px;font-weight:500;color:#fff;letter-spacing:.02em">Ads Monetization</div>
+      <div style="font-size:10px;color:var(--hint);margin-top:1px">Brand Solutions · FY 26–27</div>
+    </div>
+  </div>
+  <div style="flex:1;padding:0 28px">
+    <div style="font-size:10px;color:var(--hint);text-transform:uppercase;letter-spacing:.04em">Data sources</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:2px">Package_Details · April_Booked_Revenue · Master Brand Tracker</div>
+  </div>
+  <div class="hdr-meta">
+    <strong id="hdr-date">—</strong>
+    <span id="hdr-src">Loading data…</span>
+    <div class="live"><div class="ld"></div><span id="liveT">—</span></div>
+  </div>
+</div>
+
+<div id="loading-screen" class="loading">
+  <div class="spinner"></div>
+  <div style="font-size:12px;color:var(--muted)">Loading dashboard data…</div>
+</div>
+
+<div id="main-content" style="display:none">
+  <div class="tabs">
+    <div class="tab on" onclick="goTab('ov',this)">Overview</div>
+    <div class="tab" onclick="goTab('bu',this)">BU Split</div>
+    <div class="tab" onclick="goTab('ex',this)">NSV Exclusions</div>
+    <div class="tab" onclick="goTab('ne',this)">Non-Endemic</div>
+    <div class="tsep"></div>
+    <div class="tab" onclick="goTab('ytd',this)">Q1 YTD</div>
+  </div>
+
+  <div class="ctrl">
+    <span class="cl">Month</span>
+    <div class="m-sel" id="month-sel"></div>
+    <div class="csep"></div>
+    <span class="cl">BU Filter</span>
+    <button class="cb" onclick="toggleHP()" id="hpBtn">Select BUs</button>
+    <div class="csep"></div>
+    <span class="cl">Sort BUs by</span>
+    <button class="cb on" onclick="sortBU('rev',this)" id="sRev">Revenue</button>
+    <button class="cb" onclick="sortBU('ach',this)" id="sAch">Ach %</button>
+    <button class="cb" onclick="sortBU('act',this)" id="sAct">Active %</button>
+    <div class="csp"></div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--hint)"><div class="ld"></div><span id="ctrlTime">—</span></div>
+  </div>
+  <div class="hp" id="hp"></div>
+
+  <div class="pane on" id="pane-ov">
+    <div class="g5" id="kpis"></div>
+    <div class="sh"><div class="sb"></div><div class="st">Revenue vs target</div></div>
+    <div class="g2">
+      <div class="card"><div class="ct">Ads revenue vs AOP target (₹ Cr)</div><div class="bl" id="rev-bar"></div><div class="lrow"><div class="leg"><div class="lb" style="background:var(--accent)"></div>Actual</div><div class="leg"><div class="lb" style="background:var(--s3);border:1px solid var(--bd2)"></div>Target</div></div></div>
+      <div class="card"><div class="ct">Ads % of Platform NSV</div><div class="bl" id="nsv-bar"></div><div class="note" id="nsv-note" style="margin-top:8px"></div></div>
+    </div>
+    <div class="sh"><div class="sb"></div><div class="st">Advertiser activity</div></div>
+    <div class="g3">
+      <div class="card"><div class="ctm">Active advertisers</div><div id="adv-c"></div></div>
+      <div class="card"><div class="ctm" id="ret-title">Retention</div><div id="ret-c"></div></div>
+      <div class="card"><div class="ctm">Brand tier split</div><div class="tier-g" id="tier-c"></div></div>
+    </div>
+    <div class="sh"><div class="sb"></div><div class="st" id="top-st">Top brands</div></div>
+    <div class="g2">
+      <div class="card"><div class="ct" id="top-t">Top brands</div><div class="brl" id="top-b"></div></div>
+      <div class="card"><div class="ct">Revenue by portfolio</div><div class="bl" id="port-b"></div></div>
+    </div>
+  </div>
+
+  <div class="pane" id="pane-bu">
+    <div class="sh"><div class="sb"></div><div class="st" id="bu-st">BU performance</div></div>
+    <div class="card" style="margin-bottom:16px">
+      <div style="overflow-x:auto">
+        <table style="min-width:700px">
+          <thead><tr>
+            <th style="text-align:left">BU / Portfolio</th>
+            <th>Total brands</th><th>Active adv</th><th>Active %</th>
+            <th>Ads rev (₹ Cr)</th><th>Target (₹ Cr)</th><th>Ach %</th><th>Gap</th>
+          </tr></thead>
+          <tbody id="bu-tb"></tbody><tfoot id="bu-tf"></tfoot>
+        </table>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="ct">Active advertiser % by BU</div><div class="bl" id="bu-ab"></div></div>
+      <div class="card"><div class="ct">Ads revenue by BU (₹ Cr)</div><div class="bl" id="bu-rb"></div></div>
+    </div>
+  </div>
+
+  <div class="pane" id="pane-ex">
+    <div class="sh"><div class="sb"></div><div class="st">NSV exclusion analysis</div></div>
+    <div class="card" style="margin-bottom:16px">
+      <div class="ct" style="margin-bottom:14px">Ads % of Platform NSV — exclusion scenarios
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="mbd mbd-a">Apr — actual NSV</span>
+          <span class="mbd mbd-m">May — projected NSV</span>
+          <span class="mbd mbd-j">Jun — AOP target NSV</span>
+        </div>
+      </div>
+      <div style="overflow-x:auto"><table class="exc-t" id="exc-t"></table></div>
+      <div class="note" style="margin-top:10px">Apr NSV: actual (April_Booked_Revenue_2026.xlsx) · May NSV: projected (Master Brand Tracker) · Jun NSV: AOP target (Review Deck)</div>
+    </div>
+    <div class="sh"><div class="sb"></div><div class="st">Advertiser cohort analysis</div></div>
+    <div class="g3">
+      <div class="card"><div class="ctm">M1 brand retention</div><div style="font-size:26px;font-weight:500;margin:6px 0 2px" id="ret-pct">—</div><div style="font-size:11px;color:var(--muted)" id="ret-sub">—</div><div style="margin-top:10px;background:var(--bg);border-radius:4px;height:6px;overflow:hidden;border:1px solid var(--bd)"><div id="ret-bar" style="height:100%;border-radius:3px;background:var(--accent)"></div></div></div>
+      <div class="card"><div class="ctm">M1 revenue retention</div><div style="font-size:26px;font-weight:500;margin:6px 0 2px" id="rev-ret-pct">—</div><div style="font-size:11px;color:var(--muted)" id="rev-ret-sub">—</div><div id="rev-ret-chip" style="margin-top:6px"></div></div>
+      <div class="card"><div class="ctm">New advertisers</div><div style="font-size:26px;font-weight:500;margin:6px 0 2px" id="new-pct">—</div><div style="font-size:11px;color:var(--muted)" id="new-sub">—</div><div id="new-chip" style="margin-top:6px"></div></div>
+    </div>
+    <div class="card"><div style="display:flex;align-items:center;gap:10px;padding:6px 0"><div style="font-size:18px;color:var(--hint)">⏸</div><div><div style="font-size:12px;color:var(--muted)">Reactivated advertiser cohort — data pending</div><div class="note">Requires historical baseline beyond current export window.</div></div><span class="pend">⏳ Pending</span></div></div>
+  </div>
+
+  <div class="pane" id="pane-ne">
+    <div class="sh"><div class="sb"></div><div class="st">Non-endemic deals — FY27</div></div>
+    <div class="card" style="margin-bottom:16px"><table class="ne-t" id="ne-t"></table></div>
+    <div class="g3">
+      <div class="card"><div class="ctm">Q1 total non-endemic rev</div><div id="ne-total" style="font-size:24px;font-weight:500;margin:6px 0 2px"></div><div style="font-size:11px;color:var(--muted)">Apr + May + Jun actuals</div></div>
+      <div class="card"><div class="ctm">Active partners (Q1)</div><div style="font-size:24px;font-weight:500;margin:6px 0 2px">2</div><div style="font-size:11px;color:var(--muted)">Samsung · Dentsu / Agency network</div></div>
+      <div class="card"><div class="ctm">Jun '26 confirmed pipeline</div><div style="font-size:24px;font-weight:500;margin:6px 0 2px;color:var(--green)">₹2.25 Cr</div><div style="font-size:11px;color:var(--muted)">Samsung continuation + Dentsu</div><span class="chip cg" style="margin-top:6px">Booked — approval pending</span></div>
+    </div>
+    <div class="card"><div style="display:flex;align-items:center;gap:10px;padding:6px 0"><div style="font-size:18px;color:var(--hint)">⬜</div><div><div style="font-size:12px;color:var(--muted)">HP Roadblock takeovers — data pending</div><div class="note">Supply team tracks HP takeover bookings separately.</div></div><span class="pend">⏳ Pending</span></div></div>
+  </div>
+
+  <div class="pane" id="pane-ytd">
+    <div class="g5" id="ytd-kpis"></div>
+    <div class="sh"><div class="sb"></div><div class="st">Q1 monthly performance</div></div>
+    <div class="g2">
+      <div class="card"><div class="ct">Ads revenue vs AOP target — Q1 (₹ Cr)</div><div class="bl" id="ytd-rev"></div><div class="lrow"><div class="leg"><div class="lb" style="background:var(--accent)"></div>Actual</div><div class="leg"><div class="lb" style="background:var(--s3);border:1px solid var(--bd2)"></div>Target</div></div></div>
+      <div class="card"><div class="ct">Ads % of NSV — Q1</div><div class="bl" id="ytd-nsv"></div><div class="note" style="margin-top:8px">Apr actual · May projected · Jun AOP target</div></div>
+    </div>
+    <div class="sh"><div class="sb"></div><div class="st">BU performance across Q1</div></div>
+    <div class="g2">
+      <div class="card"><div class="ct">Q1 cumulative revenue by BU (₹ Cr)</div><div class="bl" id="ytd-bu-rev"></div></div>
+      <div class="card"><div class="ct">FY27 full-year trajectory</div><div id="ytd-traj"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG: change this path to wherever you put dashboard_data.json on OneDrive ──
+const DATA_URL = 'https://raw.githubusercontent.com/RILsarang/Ad-monetization-Master-Sheet/main/dashboard_data.json';
+// If hosting on SharePoint, use the full URL e.g.:
+// const DATA_URL = 'https://rilcloud-my.sharepoint.com/personal/sarang_pious_ril_com/Documents/Dashboard/dashboard_data.json';
+
+let D = null;
+let curM = null;
+let sortKey = 'rev';
+let hiddenBUs = new Set();
+const MONTH_KEYS = ['Apr26','May26','Jun26'];
+
+async function loadData() {
+  try {
+    const resp = await fetch(DATA_URL + '?t=' + Date.now()); // cache-bust
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    D = await resp.json();
+    initDashboard();
+  } catch(e) {
+    document.getElementById('loading-screen').innerHTML =
+      '<div class="err">Could not load dashboard_data.json<br><small style="opacity:.7">Make sure the file is in the same folder as this HTML, or update DATA_URL in the script.</small></div>';
+  }
+}
+
+function initDashboard() {
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+
+  // Set header meta
+  const updated = new Date(D.meta.last_updated);
+  document.getElementById('hdr-date').textContent = updated.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('hdr-src').textContent = 'Package_Details · Master Brand Tracker · April_Booked_Revenue';
+
+  // Build month tabs — only show months that have data
+  const sel = document.getElementById('month-sel');
+  MONTH_KEYS.forEach(k => {
+    const m = D.months[k];
+    if (!m) return;
+    const btn = document.createElement('button');
+    btn.className = 'ms' + (k === 'Jun26' ? ' on' : '');
+    btn.textContent = m.label;
+    btn.onclick = () => setM(k, btn);
+    sel.appendChild(btn);
+  });
+
+  curM = 'Jun26';
+  renderAll();
+  tick();
+  setInterval(tick, 60000);
+  // Auto-refresh data every hour
+  setInterval(loadData, 3600000);
+}
+
+// ── HELPERS ──────────────────────────────────────────────────────────────
+function f2(n) { try { return (+n).toFixed(2) } catch { return '—' } }
+function f1(n) { try { return (+n).toFixed(1) } catch { return '—' } }
+function ac(a) { return a >= 90 ? 'pg' : a >= 60 ? 'pa' : a > 0 ? 'pr' : 'pb' }
+function prevKey(k) { const i = MONTH_KEYS.indexOf(k); return i > 0 ? MONTH_KEYS[i-1] : null }
+
+function buildKPIs() {
+  const m = D.months[curM];
+  document.getElementById('kpis').innerHTML = [
+    {l:"Ads revenue",v:`₹${f2(m.ads_rev)} Cr`,s:`Target ₹${f2(m.ads_target)} Cr`,chip:`${f1(m.ach_pct)}% of AOP`,cc:m.ach_pct>=90?'cg':m.ach_pct>=60?'ca':'cr',acc:m.ach_pct>=90?'g':m.ach_pct>=60?'a':'r'},
+    {l:"Platform NSV",v:`₹${f1(m.platform_nsv)} Cr`,s:m.nsv_type,chip:`Ads %: ${f2(m.ads_pct_nsv)}%`,cc:'cb2',acc:''},
+    {l:"Active advertisers",v:m.active_brands.toLocaleString(),s:`of ${m.total_platform_brands.toLocaleString()} platform brands`,chip:`${f2(m.active_brands/m.total_platform_brands*100)}% active`,cc:'ct2',acc:'t'},
+    {l:"ex-Jewellery NSV",v:`₹${f1(m.platform_nsv-m.nsv_jewellery)} Cr`,s:`Jwl share: ${f2(m.nsv_jewellery/m.platform_nsv*100)}%`,chip:`Ads %: ${f2(m.ads_pct_ex_jwl)}%`,cc:'cb2',acc:''},
+    {l:"Core NSV (ex-Jwl/Shein/RRFB)",v:`₹${f1(m.platform_nsv-m.nsv_jewellery-m.nsv_shein-m.nsv_rrfb)} Cr`,s:`Purest monetisation base`,chip:`Ads %: ${f2(m.ads_pct_ex_all)}%`,cc:'cg',acc:'g'},
+  ].map(k=>`<div class="kpi ${k.acc}"><div class="kl">${k.l}</div><div class="kv">${k.v}</div><div class="ks">${k.s}</div><span class="chip ${k.cc}">${k.chip}</span></div>`).join('');
+}
+
+function buildRevBars() {
+  const max = Math.max(...MONTH_KEYS.map(k => D.months[k]?.ads_target || 0));
+  const nsvMax = Math.max(...MONTH_KEYS.map(k => D.months[k]?.ads_pct_nsv || 0)) * 1.3;
+  const COLS = ['var(--accent)','var(--teal)','var(--green)'];
+
+  document.getElementById('rev-bar').innerHTML = MONTH_KEYS.map((k,i) => {
+    const m = D.months[k]; if(!m) return '';
+    const w = m.ads_rev/max*100, tw = m.ads_target/max*100, isC = k===curM;
+    return `<div class="br" style="${isC?'outline:1px solid #3D8EF044;border-radius:4px;':''}">
+      <div class="blbl">${m.label}</div>
+      <div class="btrk">
+        <div style="position:absolute;height:100%;width:${tw.toFixed(1)}%;background:var(--s3);border-radius:3px"></div>
+        <div class="bfil" style="position:relative;width:${Math.max(w,.5).toFixed(1)}%;background:${COLS[i]};z-index:1">${w>7?'₹'+f1(m.ads_rev)+'Cr':''}</div>
+      </div>
+      <div class="bv"><span class="pill ${ac(m.ach_pct)}">${f1(m.ach_pct)}%</span></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('nsv-bar').innerHTML = MONTH_KEYS.map((k,i) => {
+    const m = D.months[k]; if(!m) return '';
+    const w = m.ads_pct_nsv/nsvMax*100;
+    return `<div class="br"><div class="blbl">${m.label}<span class="src-tag">${m.nsv_type}</span></div>
+      <div class="btrk"><div class="bfil" style="width:${w.toFixed(1)}%;background:var(--teal)">${w>8?m.ads_pct_nsv+'%':''}</div></div>
+      <div class="bv">${m.ads_pct_nsv}%</div></div>`;
+  }).join('');
+
+  const m = D.months[curM];
+  document.getElementById('nsv-note').textContent = `${m.label} NSV: ${m.nsv_type}`;
+}
+
+function buildAdvCard() {
+  const m = D.months[curM], pk = prevKey(curM), prev = pk ? D.months[pk] : null;
+  document.getElementById('adv-c').innerHTML = `
+    <div style="font-size:28px;font-weight:500;margin-bottom:4px">${m.active_brands.toLocaleString()}</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">active advertisers — ${m.label}</div>
+    ${prev ? `<div class="spark">
+      <div class="sprow"><div class="splbl">Prev month</div><div class="spv">${prev.active_brands.toLocaleString()}</div><div class="spdel" style="color:${m.active_brands>=prev.active_brands?'var(--green)':'var(--red)'}">${m.active_brands>=prev.active_brands?'+':''}${m.active_brands-prev.active_brands}</div></div>
+      <div class="sprow"><div class="splbl">${m.label}</div><div class="spv">${m.active_brands.toLocaleString()}</div></div>
+    </div>` : '<div class="note">First FY27 month — no prior month comparison</div>'}
+    <div style="background:var(--bg);border:1px solid var(--bd);border-radius:4px;height:5px;overflow:hidden;margin-top:10px"><div style="width:${(m.active_brands/m.total_platform_brands*100).toFixed(1)}%;height:100%;background:var(--accent);border-radius:3px"></div></div>
+    <div class="note" style="margin-top:4px">${f2(m.active_brands/m.total_platform_brands*100)}% of ${m.total_platform_brands.toLocaleString()} total platform brands</div>`;
+}
+
+function buildRetCard() {
+  const m = D.months[curM], r = m.retention;
+  document.getElementById('ret-title').textContent = !r ? 'No prior month baseline' : 'Retention & new advertisers';
+  if (!r) { document.getElementById('ret-c').innerHTML = `<div class="pend">ⓘ First FY27 month — M1 retention not applicable</div>`; return; }
+  document.getElementById('ret-c').innerHTML = `
+    <div class="spark">
+      <div class="sprow"><div class="splbl">M1 brand retention</div><div class="spv" style="color:var(--accent)">${r.m1_brand_pct}%</div></div>
+      <div class="sprow"><div class="splbl">M1 revenue retention</div><div class="spv" style="color:${r.m1_rev_pct>=100?'var(--green)':'var(--amber)'}">${r.m1_rev_pct}%</div></div>
+      <div class="sprow"><div class="splbl">New advertiser %</div><div class="spv">${r.new_advertiser_pct}%</div></div>
+      <div class="sprow"><div class="splbl">New advertiser revenue</div><div class="spv">₹${f2(r.new_advertiser_rev)} Cr</div></div>
+      <div class="sprow" style="border-bottom:none"><div class="splbl">New adv % of total rev</div><div class="spv">${r.new_advertiser_rev_pct}%</div></div>
+    </div>
+    <div class="note" style="margin-top:6px">${r.note}</div>`;
+}
+
+function buildTierCard() {
+  const t = D.months[curM].tier, tot = D.months[curM].ads_rev;
+  document.getElementById('tier-c').innerHTML = [
+    {l:'LCS',k:'lcs',c:'lcs'},{l:'Growth',k:'growth',c:'gr'},{l:'Long Tail',k:'longtail',c:'lt'}
+  ].map(x => `<div class="tc ${x.c}">
+    <div style="font-size:10px;font-weight:500;color:var(--hint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">${x.l}</div>
+    <div style="font-size:20px;font-weight:500">${t[x.k].active}</div>
+    <div style="font-size:10px;color:var(--muted);margin-top:2px">brands</div>
+    <div style="font-size:12px;font-weight:500;margin-top:7px">₹${f2(t[x.k].rev)} Cr</div>
+    <div style="font-size:10px;color:var(--muted)">${(t[x.k].rev/tot*100).toFixed(0)}% of rev</div>
+  </div>`).join('');
+}
+
+function buildTopBrands() {
+  const brands = D.months[curM].top_brands, max = brands[0].rev_l;
+  const COLS = ['var(--accent)','var(--accent2)','var(--teal)','var(--green)','var(--amber)'];
+  document.getElementById('top-t').textContent = `Top ${brands.length} brands — ${D.months[curM].label}`;
+  document.getElementById('top-b').innerHTML = brands.map((b,i) => `<div class="brw">
+    <div class="bnk">${i+1}</div><div class="bnn">${b.name}</div>
+    <div class="bnt"><div class="bnf" style="width:${(b.rev_l/max*100).toFixed(0)}%;background:${COLS[i%COLS.length]}"></div></div>
+    <div class="bna">₹${f1(b.rev_l)}L</div>
+  </div>`).join('');
+}
+
+function buildPortBars() {
+  const ports = D.months[curM].portfolios, max = ports[0].rev;
+  document.getElementById('port-b').innerHTML = ports.map(p => `<div class="br">
+    <div class="blbl">${p.name}</div>
+    <div class="btrk"><div class="bfil" style="width:${(p.rev/max*100).toFixed(0)}%;background:var(--accent)">${p.rev>=0.3?'₹'+f2(p.rev)+'Cr':''}</div></div>
+    <div class="bv">₹${f2(p.rev)}</div>
+  </div>`).join('');
+}
+
+function buildBUTable() {
+  const m = D.months[curM];
+  let bus = [...m.bu_split].filter(b => !hiddenBUs.has(b.bu));
+  if (sortKey==='rev') bus.sort((a,b) => b.rev-a.rev);
+  else if (sortKey==='ach') bus.sort((a,b) => (b.target>0?b.rev/b.target:0)-(a.target>0?a.rev/a.target:0));
+  else bus.sort((a,b) => (b.active/b.total)-(a.active/a.total));
+  document.getElementById('bu-st').textContent = `BU performance — ${m.label}`;
+
+  const tRev=m.bu_split.reduce((s,b)=>s+b.rev,0), tTgt=m.bu_split.reduce((s,b)=>s+b.target,0);
+  const tAct=m.bu_split.reduce((s,b)=>s+b.active,0), tTot=m.bu_split.reduce((s,b)=>s+b.total,0);
+
+  document.getElementById('bu-tb').innerHTML = bus.map(b => {
+    const ach=b.target>0?b.rev/b.target*100:0, actP=b.total>0?b.active/b.total*100:0, gap=b.rev-b.target;
+    return `<tr><td>${b.bu}</td><td>${b.total.toLocaleString()}</td><td>${b.active}</td>
+      <td><span class="pill ${actP>=30?'pg':actP>=10?'pa':'pr'}">${actP.toFixed(0)}%</span></td>
+      <td style="font-weight:500">₹${f2(b.rev)}</td><td style="color:var(--muted)">₹${f2(b.target)}</td>
+      <td><span class="pill ${ac(ach)}">${b.target>0?ach.toFixed(0)+'%':'—'}</span></td>
+      <td style="color:${b.target>0?gap>=0?'var(--green)':'var(--red)':'var(--hint)'};font-weight:500">${b.target>0?(gap>=0?'+':'')+f2(gap):'—'}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('bu-tf').innerHTML = `<tr>
+    <td>Total</td><td>${tTot.toLocaleString()}</td><td>${tAct}</td>
+    <td>${(tAct/tTot*100).toFixed(0)}%</td><td style="font-weight:600">₹${f2(tRev)}</td><td>₹${f2(tTgt)}</td>
+    <td><span class="pill ${ac(tRev/tTgt*100)}">${(tRev/tTgt*100).toFixed(0)}%</span></td>
+    <td style="color:${tRev>=tTgt?'var(--green)':'var(--red)'}">${tRev>=tTgt?'+':''}₹${f2(tRev-tTgt)}</td>
+  </tr>`;
+
+  const topAct=[...m.bu_split].sort((a,b)=>(b.active/b.total)-(a.active/a.total)).slice(0,10);
+  const topRev=[...m.bu_split].sort((a,b)=>b.rev-a.rev).slice(0,10);
+  const mA=topAct[0].active/topAct[0].total*100, mR=topRev[0].rev;
+  document.getElementById('bu-ab').innerHTML = topAct.map(b=>{const p=b.active/b.total*100,w=p/mA*100;return`<div class="br"><div class="blbl">${b.bu}</div><div class="btrk"><div class="bfil" style="width:${w.toFixed(0)}%;background:var(--teal)">${p>=8?p.toFixed(0)+'%':''}</div></div><div class="bv">${p.toFixed(0)}%</div></div>`;}).join('');
+  document.getElementById('bu-rb').innerHTML = topRev.map(b=>{const w=b.rev/mR*100;return`<div class="br"><div class="blbl">${b.bu}</div><div class="btrk"><div class="bfil" style="width:${w.toFixed(0)}%;background:var(--accent)">${w>8?'₹'+f2(b.rev)+'Cr':''}</div></div><div class="bv">₹${f2(b.rev)}</div></div>`;}).join('');
+}
+
+function buildExcl() {
+  const rows = [
+    {l:"Overall platform NSV",k:"ads_pct_nsv",nf:m=>m.platform_nsv},
+    {l:"ex-Jewellery",k:"ads_pct_ex_jwl",nf:m=>m.platform_nsv-m.nsv_jewellery},
+    {l:"ex-Shein",k:"ads_pct_ex_shein",nf:m=>m.platform_nsv-m.nsv_shein},
+    {l:"ex-RRFB",k:"ads_pct_ex_rrfb",nf:m=>m.platform_nsv-m.nsv_rrfb},
+    {l:"ex-Shein & Jewellery",k:"ads_pct_ex_shein_jwl",nf:m=>m.platform_nsv-m.nsv_shein-m.nsv_jewellery},
+    {l:"ex-Shein & RRFB",k:"ads_pct_ex_shein_rrfb",nf:m=>m.platform_nsv-m.nsv_shein-m.nsv_rrfb},
+    {l:"ex-Jewellery & RRFB",k:"ads_pct_ex_jwl_rrfb",nf:m=>m.platform_nsv-m.nsv_jewellery-m.nsv_rrfb},
+    {l:"ex-Shein, Jwl & RRFB",k:"ads_pct_ex_all",nf:m=>m.platform_nsv-m.nsv_shein-m.nsv_jewellery-m.nsv_rrfb,hi:true},
+  ];
+  document.getElementById('exc-t').innerHTML = `<tr><th>Scenario</th>${MONTH_KEYS.map(k=>`<th>${D.months[k].label} NSV</th><th>${D.months[k].label} Ads %</th>`).join('')}</tr>`
+    + rows.map(r=>`<tr><td>${r.l}</td>${MONTH_KEYS.map(k=>{const m=D.months[k],nsv=r.nf(m),pct=m[r.k];return`<td style="color:var(--hint)">${f1(nsv)}</td><td class="${r.hi?'hi':''}">${f2(pct)}%</td>`;}).join('')}</tr>`).join('');
+
+  const m = D.months[curM], r = m.retention, pk = prevKey(curM), prev = pk ? D.months[pk] : null;
+  if (r) {
+    const retEl = document.getElementById('ret-pct');
+    retEl.textContent = r.m1_brand_pct + '%';
+    retEl.style.color = r.m1_brand_pct >= 80 ? 'var(--green)' : 'var(--amber)';
+    document.getElementById('ret-sub').textContent = prev ? `${Math.round(r.m1_brand_pct/100*prev.active_brands)} of ${prev.active_brands} prior-month brands returned` : '';
+    document.getElementById('ret-bar').style.width = r.m1_brand_pct + '%';
+    const rrEl = document.getElementById('rev-ret-pct');
+    rrEl.textContent = r.m1_rev_pct + '%';
+    rrEl.style.color = r.m1_rev_pct >= 100 ? 'var(--green)' : 'var(--amber)';
+    document.getElementById('rev-ret-sub').textContent = r.m1_rev_pct >= 100 ? 'Retained brands spent more this month' : 'Revenue from retained brands';
+    document.getElementById('rev-ret-chip').innerHTML = `<span class="chip ${r.m1_rev_pct>=100?'cg':'ca'}">₹${f2(r.new_advertiser_rev)} Cr from new brands</span>`;
+    document.getElementById('new-pct').textContent = r.new_advertiser_pct + '%';
+    document.getElementById('new-sub').textContent = `${m.active_brands - (prev?Math.round(r.m1_brand_pct/100*prev.active_brands):0)} first-time advertisers`;
+    document.getElementById('new-chip').innerHTML = `<span class="chip cb2">₹${f2(r.new_advertiser_rev)} Cr · ${r.new_advertiser_rev_pct}% of total</span>`;
+  } else {
+    ['ret-pct','rev-ret-pct','new-pct'].forEach(id=>{document.getElementById(id).textContent='—';document.getElementById(id).style.color='var(--hint)';});
+    document.getElementById('ret-sub').textContent = 'First FY27 month — no M1 baseline';
+    document.getElementById('rev-ret-sub').textContent = 'No prior month data available';
+    document.getElementById('new-sub').textContent = 'New advertiser baseline not established';
+    document.getElementById('ret-bar').style.width = '0';
+    ['rev-ret-chip','new-chip'].forEach(id => document.getElementById(id).innerHTML = '');
+  }
+}
+
+function buildNE() {
+  const allNE = MONTH_KEYS.flatMap(k => (D.months[k].non_endemic||[]).map(d => ({...d, month: D.months[k].label, monthKey: k})));
+  document.getElementById('ne-t').innerHTML = `<tr><th>Month</th><th>Advertiser</th><th>Revenue (₹ Cr)</th><th>Objective</th><th>Status</th></tr>`
+    + allNE.map(d => {
+      const mc = d.monthKey==='Apr26'?'mbd-a':d.monthKey==='May26'?'mbd-m':'mbd-j';
+      const sc = d.status==='Active'?'pg':d.status==='Pipeline'?'pb':d.status==='Closed'?'pa':'';
+      return `<tr><td><span class="mbd ${mc}">${d.month}</span></td><td style="font-weight:500">${d.name}</td><td style="font-weight:500;color:var(--accent)">₹${f2(d.rev)}</td><td style="color:var(--muted)">${d.objective}</td><td><span class="pill ${sc}">${d.status}</span></td></tr>`;
+    }).join('');
+  const total = allNE.reduce((s,d) => s + d.rev, 0);
+  document.getElementById('ne-total').textContent = '₹' + f2(total) + ' Cr';
+}
+
+function buildYTD() {
+  const ytd = D.ytd;
+  document.getElementById('ytd-kpis').innerHTML = [
+    {l:"Q1 revenue",v:`₹${f2(ytd.q1_actual)} Cr`,s:`Apr + May + Jun`,chip:`${f1(ytd.q1_ach_pct)}% of ₹${f2(ytd.q1_target)} Cr target`,cc:'ca',acc:'a'},
+    {l:"Q1 AOP target",v:`₹${f2(ytd.q1_target)} Cr`,s:`Gap: ₹${f2(ytd.q1_target-ytd.q1_actual)} Cr`,chip:`${f1(100-ytd.q1_ach_pct)}% remaining`,cc:'cr',acc:'r'},
+    {l:"Best month (Q1)",v:"May '26",s:"₹11.06 Cr · 52.5% ach",chip:"Highest of Q1",cc:'cg',acc:'g'},
+    {l:"YoY Q1",v:`+${ytd.yoy_pct}%`,s:`FY26 Q1: ₹${f2(ytd.fy26_q1_actual)} Cr`,chip:`FY27 Q1: ₹${f2(ytd.q1_actual)} Cr`,cc:'cg',acc:'g'},
+    {l:"FY27 run-rate needed",v:"₹46 Cr/mo",s:"Remaining 9 months",chip:`${f1(ytd.q1_actual/ytd.fy27_annual_target*100)}% of annual done`,cc:'cr',acc:'r'},
+  ].map(k=>`<div class="kpi ${k.acc}"><div class="kl">${k.l}</div><div class="kv">${k.v}</div><div class="ks">${k.s}</div><span class="chip ${k.cc}">${k.chip}</span></div>`).join('');
+
+  const max = Math.max(...MONTH_KEYS.map(k=>D.months[k].ads_target));
+  const nsvMax = Math.max(...MONTH_KEYS.map(k=>D.months[k].ads_pct_nsv))*1.3;
+  const COLS = ['var(--accent)','var(--teal)','var(--green)'];
+
+  document.getElementById('ytd-rev').innerHTML = MONTH_KEYS.map((k,i)=>{
+    const m=D.months[k],w=m.ads_rev/max*100,tw=m.ads_target/max*100;
+    return`<div class="br"><div class="blbl">${m.label}<span class="src-tag">${m.nsv_type}</span></div>
+      <div class="btrk">
+        <div style="position:absolute;height:100%;width:${tw.toFixed(0)}%;background:var(--s3);border-radius:3px"></div>
+        <div class="bfil" style="position:relative;width:${Math.max(w,.5).toFixed(0)}%;background:${COLS[i]};z-index:1">${w>7?'₹'+f1(m.ads_rev)+'Cr':''}</div>
+      </div>
+      <div class="bv"><span class="pill ${ac(m.ach_pct)}">${f1(m.ach_pct)}%</span></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('ytd-nsv').innerHTML = MONTH_KEYS.map((k,i)=>{
+    const m=D.months[k],w=m.ads_pct_nsv/nsvMax*100;
+    return`<div class="br"><div class="blbl">${m.label}</div><div class="btrk"><div class="bfil" style="width:${w.toFixed(0)}%;background:${COLS[i]}">${w>8?m.ads_pct_nsv+'%':''}</div></div><div class="bv">${m.ads_pct_nsv}%</div></div>`;
+  }).join('');
+
+  const combined = {};
+  MONTH_KEYS.forEach(k=>D.months[k].bu_split.forEach(b=>{if(!combined[b.bu])combined[b.bu]=0;combined[b.bu]+=b.rev;}));
+  const sortedBU = Object.entries(combined).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const maxBU = sortedBU[0][1];
+  document.getElementById('ytd-bu-rev').innerHTML = sortedBU.map(([bu,v],i)=>`<div class="br">
+    <div class="blbl">${bu}</div>
+    <div class="btrk"><div class="bfil" style="width:${(v/maxBU*100).toFixed(0)}%;background:${COLS[i%COLS.length]}">${v>=0.3?'₹'+f2(v)+'Cr':''}</div></div>
+    <div class="bv">₹${f2(v)}</div>
+  </div>`).join('');
+
+  document.getElementById('ytd-traj').innerHTML = `
+    <div style="font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:8px;margin-top:4px">
+      <div style="display:flex;justify-content:space-between"><span>FY27 annual target</span><strong style="color:var(--ink)">₹${f1(ytd.fy27_annual_target)} Cr</strong></div>
+      <div style="display:flex;justify-content:space-between"><span>YTD actuals (Q1)</span><strong style="color:var(--green)">₹${f2(ytd.q1_actual)} Cr</strong></div>
+      <div style="display:flex;justify-content:space-between"><span>Remaining</span><strong style="color:var(--red)">₹${f2(ytd.fy27_annual_target-ytd.q1_actual)} Cr</strong></div>
+      <div style="background:var(--bg);border:1px solid var(--bd);border-radius:4px;height:8px;overflow:hidden;margin:3px 0"><div style="width:${(ytd.q1_actual/ytd.fy27_annual_target*100).toFixed(1)}%;height:100%;background:var(--amber);border-radius:3px"></div></div>
+      <div style="font-size:10px;color:var(--hint)">${(ytd.q1_actual/ytd.fy27_annual_target*100).toFixed(1)}% of FY27 annual target achieved</div>
+      <div style="border-top:1px solid var(--bd);padding-top:8px;margin-top:3px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>FY26 Q1</span><strong style="color:var(--ink)">₹${f2(ytd.fy26_q1_actual)} Cr</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>FY27 Q1</span><strong style="color:var(--green)">₹${f2(ytd.q1_actual)} Cr</strong></div>
+        <span class="chip cg" style="margin-top:8px">+${ytd.yoy_pct}% YoY</span>
+      </div>
+    </div>`;
+}
+
+function buildHidePanel() {
+  const hp = document.getElementById('hp');
+  if (hp.children.length) return;
+  const allBUs = [...new Set(MONTH_KEYS.flatMap(k=>D.months[k].bu_split.map(b=>b.bu)))].sort();
+  allBUs.forEach(bu => {
+    const btn = document.createElement('button');
+    btn.className = 'hp-bu on'; btn.textContent = bu;
+    btn.onclick = () => { hiddenBUs.has(bu)?hiddenBUs.delete(bu):hiddenBUs.add(bu); btn.classList.toggle('on',!hiddenBUs.has(bu)); buildBUTable(); };
+    hp.appendChild(btn);
+  });
+}
+
+function renderAll() { buildKPIs();buildRevBars();buildAdvCard();buildRetCard();buildTierCard();buildTopBrands();buildPortBars();buildBUTable();buildExcl();buildNE();buildYTD(); }
+function goTab(id,el) { document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));el.classList.add('on');document.getElementById('pane-'+id).classList.add('on'); }
+function setM(k,el) { curM=k;document.querySelectorAll('.m-sel .ms').forEach(b=>b.classList.remove('on'));el.classList.add('on');renderAll(); }
+function sortBU(k,el) { sortKey=k;['sRev','sAch','sAct'].forEach(id=>document.getElementById(id).classList.remove('on'));el.classList.add('on');buildBUTable(); }
+function toggleHP() { const hp=document.getElementById('hp');const show=hp.style.display!=='flex';hp.style.display=show?'flex':'none';document.getElementById('hpBtn').classList.toggle('on',show);if(show)buildHidePanel(); }
+function tick() { const t=new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'});document.getElementById('liveT').textContent=t+' IST · Next refresh 9:00 AM';document.getElementById('ctrlTime').textContent=t+' IST'; }
+
+loadData();
+</script>
+</body>
+</html>
