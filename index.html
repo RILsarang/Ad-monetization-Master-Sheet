@@ -260,7 +260,7 @@ tfoot td:first-child{text-align:left}
 </div>
 
 <script>
-const DATA_URL = 'https://cdn.jsdelivr.net/gh/RILsarang/Ad-monetization-Master-Sheet@main/dashboard_data.json';
+const DATA_URL = 'https://api.github.com/repos/RILsarang/Ad-monetization-Master-Sheet/contents/dashboard_data.json';
 // If hosting on SharePoint, use the full URL e.g.:
 
 let D = null;
@@ -271,13 +271,13 @@ const MONTH_KEYS = ['Apr26','May26','Jun26'];
 
 async function loadData() {
   try {
-    const resp = await fetch(DATA_URL + '?t=' + Date.now()); // cache-bust
+    const resp = await fetch(DATA_URL, {headers: {Accept: 'application/vnd.github.v3.raw'}});
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     D = await resp.json();
     initDashboard();
   } catch(e) {
     document.getElementById('loading-screen').innerHTML =
-      '<div class="err">Could not load dashboard_data.json<br><small style="opacity:.7">Make sure the file is in the same folder as this HTML, or update DATA_URL in the script.</small></div>';
+      '<div class="err">Could not load dashboard_data.json<br><small style="opacity:.7">' + e.message + '</small></div>';
   }
 }
 
