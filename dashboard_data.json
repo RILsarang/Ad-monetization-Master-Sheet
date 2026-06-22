@@ -1,12 +1,12 @@
 {
   "meta": {
-    "last_updated": "2026-06-15T07:21:00+05:30",
-    "next_refresh": "2026-06-16T09:00:00+05:30",
+    "last_updated": "2026-06-16T10:04:00+05:30",
+    "next_refresh": "2026-06-17T09:00:00+05:30",
     "data_sources": {
-      "ads_revenue": "Package_Details (rilcloud.sharepoint.com/sites/SalesOpsHub)",
+      "ads_revenue": "Package_Details_2026-06-16_1004.csv (rilcloud SharePoint)",
       "nsv_apr": "April_Booked_Revenue_2026.xlsx (actual)",
       "nsv_may": "Master Brand Tracker col 25 (projected)",
-      "nsv_jun": "AOP target — Review Deck",
+      "nsv_jun": "AOP target \u2014 Review Deck",
       "bu_data": "Master Brand Tracker (sarang_pious_ril_com OneDrive)"
     }
   },
@@ -20,11 +20,12 @@
       "total_platform_brands": 9595,
       "platform_nsv": 576.47,
       "nsv_type": "actual",
+      "nsv_src": "April_Booked_Revenue_2026.xlsx",
       "nsv_jewellery": 293.69,
       "nsv_shein": 2.23,
       "nsv_rrfb": 53.04,
       "ads_pct_nsv": 1.37,
-      "ads_pct_ex_jwl": 2.80,
+      "ads_pct_ex_jwl": 2.8,
       "ads_pct_ex_shein": 1.39,
       "ads_pct_ex_rrfb": 1.51,
       "ads_pct_ex_shein_jwl": 2.82,
@@ -32,64 +33,270 @@
       "ads_pct_ex_jwl_rrfb": 3.11,
       "ads_pct_ex_all": 3.48,
       "retention": null,
-      "tier": { "lcs": {"active":49,"rev":6.124}, "growth": {"active":16,"rev":0.627}, "longtail": {"active":36,"rev":1.170} },
+      "tier": {
+        "lcs": {
+          "active": 49,
+          "rev": 6.124
+        },
+        "growth": {
+          "active": 16,
+          "rev": 0.627
+        },
+        "longtail": {
+          "active": 36,
+          "rev": 1.17
+        }
+      },
       "top_brands": [
-        {"name":"Levi's","rev_l":54.09,"bu":"National Brands"},
-        {"name":"MMTC PAMP","rev_l":42.60,"bu":"Jewellery"},
-        {"name":"DNMX","rev_l":42.00,"bu":"RRFB"},
-        {"name":"P N Gadgil Jewellers","rev_l":38.25,"bu":"Jewellery"},
-        {"name":"Avaasa Mix n Match","rev_l":38.00,"bu":"RRFB"},
-        {"name":"Netplay","rev_l":37.00,"bu":"RRFB"},
-        {"name":"Buda Jeans Co","rev_l":33.54,"bu":"QPL"},
-        {"name":"Snitch","rev_l":33.00,"bu":"Emerging Brands MP"},
-        {"name":"Spykar","rev_l":30.50,"bu":"National Brands"},
-        {"name":"Muthoot Pappachan","rev_l":27.12,"bu":"Jewellery"},
-        {"name":"Teamspirit","rev_l":24.00,"bu":"RRFB"},
-        {"name":"Augmont","rev_l":20.49,"bu":"Jewellery"},
-        {"name":"Nyrika","rev_l":18.11,"bu":"QPL"},
-        {"name":"Kalyan Jewellers","rev_l":17.05,"bu":"Jewellery"},
-        {"name":"MAX","rev_l":13.16,"bu":"Emerging Brands MP"}
+        {
+          "name": "Levi's",
+          "rev_l": 54.09
+        },
+        {
+          "name": "MMTC PAMP",
+          "rev_l": 42.6
+        },
+        {
+          "name": "DNMX",
+          "rev_l": 42.0
+        },
+        {
+          "name": "P N Gadgil Jewellers",
+          "rev_l": 38.25
+        },
+        {
+          "name": "Avaasa Mix n Match",
+          "rev_l": 38.0
+        },
+        {
+          "name": "Netplay",
+          "rev_l": 37.0
+        },
+        {
+          "name": "Buda Jeans Co",
+          "rev_l": 33.54
+        },
+        {
+          "name": "Snitch",
+          "rev_l": 33.0
+        },
+        {
+          "name": "Spykar",
+          "rev_l": 30.5
+        },
+        {
+          "name": "Muthoot Pappachan",
+          "rev_l": 27.12
+        },
+        {
+          "name": "Teamspirit",
+          "rev_l": 24.0
+        },
+        {
+          "name": "Augmont",
+          "rev_l": 20.49
+        },
+        {
+          "name": "Nyrika",
+          "rev_l": 18.11
+        },
+        {
+          "name": "Kalyan Jewellers",
+          "rev_l": 17.05
+        },
+        {
+          "name": "MAX",
+          "rev_l": 13.16
+        }
       ],
       "portfolios": [
-        {"name":"RRFB","rev":1.700},{"name":"Jewellery","rev":1.569},
-        {"name":"National Brands","rev":1.067},{"name":"EB Apparels","rev":0.845},
-        {"name":"QPL","rev":0.649},{"name":"Gold RBL","rev":0.412},
-        {"name":"Sportswear","rev":0.352},{"name":"Gold Non RBL","rev":0.280},
-        {"name":"Kids","rev":0.230},{"name":"Others","rev":0.737}
+        {
+          "name": "RRFB",
+          "rev": 1.7
+        },
+        {
+          "name": "Jewellery",
+          "rev": 1.569
+        },
+        {
+          "name": "National Brands",
+          "rev": 1.067
+        },
+        {
+          "name": "EB Apparels",
+          "rev": 0.845
+        },
+        {
+          "name": "QPL",
+          "rev": 0.649
+        },
+        {
+          "name": "Gold RBL",
+          "rev": 0.412
+        },
+        {
+          "name": "Sportswear",
+          "rev": 0.352
+        },
+        {
+          "name": "Gold Non RBL",
+          "rev": 0.28
+        },
+        {
+          "name": "Kids",
+          "rev": 0.23
+        },
+        {
+          "name": "Others",
+          "rev": 0.737
+        }
       ],
       "bu_split": [
-        {"bu":"RRFB","total":155,"active":7,"rev":1.700,"target":4.29},
-        {"bu":"Jewellery","total":337,"active":7,"rev":1.569,"target":2.00},
-        {"bu":"National Brands","total":83,"active":8,"rev":1.067,"target":2.55},
-        {"bu":"Emerging Brands MP","total":3857,"active":16,"rev":0.845,"target":5.32},
-        {"bu":"QPL","total":12,"active":5,"rev":0.649,"target":0.78},
-        {"bu":"Gold RBL","total":54,"active":10,"rev":0.412,"target":1.03},
-        {"bu":"Sportswear","total":30,"active":7,"rev":0.352,"target":3.56},
-        {"bu":"Gold Non RBL","total":36,"active":13,"rev":0.280,"target":0.75},
-        {"bu":"Kids","total":1114,"active":4,"rev":0.230,"target":1.26},
-        {"bu":"Ajiogram","total":280,"active":4,"rev":0.224,"target":0.89},
-        {"bu":"HBLTA","total":660,"active":6,"rev":0.147,"target":0.46},
-        {"bu":"Non-Endemic","total":16,"active":2,"rev":0.105,"target":0},
-        {"bu":"Shein","total":1,"active":1,"rev":0.100,"target":0.36},
-        {"bu":"IW&LW","total":718,"active":1,"rev":0.100,"target":0.64},
-        {"bu":"Beauty","total":680,"active":4,"rev":0.075,"target":1.63},
-        {"bu":"Watches & SG","total":268,"active":3,"rev":0.054,"target":1.80},
-        {"bu":"Home","total":420,"active":3,"rev":0.010,"target":0.30}
+        {
+          "bu": "RRFB",
+          "total": 155,
+          "active": 7,
+          "rev": 1.7,
+          "target": 4.29
+        },
+        {
+          "bu": "Jewellery",
+          "total": 337,
+          "active": 7,
+          "rev": 1.569,
+          "target": 2.0
+        },
+        {
+          "bu": "National Brands",
+          "total": 83,
+          "active": 8,
+          "rev": 1.067,
+          "target": 2.55
+        },
+        {
+          "bu": "Emerging Brands MP",
+          "total": 3857,
+          "active": 16,
+          "rev": 0.845,
+          "target": 5.32
+        },
+        {
+          "bu": "QPL",
+          "total": 12,
+          "active": 5,
+          "rev": 0.649,
+          "target": 0.78
+        },
+        {
+          "bu": "Gold RBL",
+          "total": 54,
+          "active": 10,
+          "rev": 0.412,
+          "target": 1.03
+        },
+        {
+          "bu": "Sportswear",
+          "total": 30,
+          "active": 7,
+          "rev": 0.352,
+          "target": 3.56
+        },
+        {
+          "bu": "Gold Non RBL",
+          "total": 36,
+          "active": 13,
+          "rev": 0.28,
+          "target": 0.75
+        },
+        {
+          "bu": "Kids",
+          "total": 1114,
+          "active": 4,
+          "rev": 0.23,
+          "target": 1.26
+        },
+        {
+          "bu": "Ajiogram",
+          "total": 280,
+          "active": 4,
+          "rev": 0.224,
+          "target": 0.89
+        },
+        {
+          "bu": "HBLTA",
+          "total": 660,
+          "active": 6,
+          "rev": 0.147,
+          "target": 0.46
+        },
+        {
+          "bu": "Non-Endemic",
+          "total": 16,
+          "active": 2,
+          "rev": 0.105,
+          "target": 0
+        },
+        {
+          "bu": "Shein",
+          "total": 1,
+          "active": 1,
+          "rev": 0.1,
+          "target": 0.36
+        },
+        {
+          "bu": "IW&LW",
+          "total": 718,
+          "active": 1,
+          "rev": 0.1,
+          "target": 0.64
+        },
+        {
+          "bu": "Beauty",
+          "total": 680,
+          "active": 4,
+          "rev": 0.075,
+          "target": 1.63
+        },
+        {
+          "bu": "Watches & SG",
+          "total": 268,
+          "active": 3,
+          "rev": 0.054,
+          "target": 1.8
+        },
+        {
+          "bu": "Home",
+          "total": 420,
+          "active": 3,
+          "rev": 0.01,
+          "target": 0.3
+        }
       ],
       "non_endemic": [
-        {"name":"Dentsu (Agency)","rev":0.25,"objective":"Display · agency inventory","status":"Closed"},
-        {"name":"Internal / Jio Platforms","rev":0.105,"objective":"Test campaign","status":"Closed"}
+        {
+          "name": "Dentsu (Agency)",
+          "rev": 0.25,
+          "objective": "Display \u00b7 agency inventory",
+          "status": "Closed"
+        },
+        {
+          "name": "Internal / Jio Platforms",
+          "rev": 0.105,
+          "objective": "Test campaign",
+          "status": "Closed"
+        }
       ]
     },
     "May26": {
       "label": "May '26",
-      "ads_rev": 11.062,
+      "ads_rev": 11.061,
       "ads_target": 21.07,
       "ach_pct": 52.5,
-      "active_brands": 1329,
+      "active_brands": 1328,
       "total_platform_brands": 9595,
       "platform_nsv": 524.78,
       "nsv_type": "projected",
+      "nsv_src": "Master Brand Tracker",
       "nsv_jewellery": 182.18,
       "nsv_shein": 1.99,
       "nsv_rrfb": 68.56,
@@ -107,139 +314,545 @@
         "new_advertiser_pct": 94.3,
         "new_advertiser_rev": 6.48,
         "new_advertiser_rev_pct": 41.7,
-        "note": "80.6% of Apr brands returned · 94.3% of May brands were new (FY27 scale-up month)"
+        "note": "80.6% of Apr brands returned \u00b7 94.3% of May brands were new (FY27 scale-up month)"
       },
-      "tier": { "lcs": {"active":60,"rev":6.22}, "growth": {"active":80,"rev":2.16}, "longtail": {"active":1189,"rev":2.68} },
+      "tier": {
+        "lcs": {
+          "active": 60,
+          "rev": 6.22
+        },
+        "growth": {
+          "active": 80,
+          "rev": 2.16
+        },
+        "longtail": {
+          "active": 1188,
+          "rev": 2.68
+        }
+      },
       "top_brands": [
-        {"name":"Samsung (Jio Platforms)","rev_l":170.0,"bu":"Non-Endemic"},
-        {"name":"Muthoot Pappachan","rev_l":60.0,"bu":"Jewellery"},
-        {"name":"Avaasa Mix n Match","rev_l":55.0,"bu":"RRFB"},
-        {"name":"DNMX","rev_l":45.0,"bu":"RRFB"},
-        {"name":"MMTC PAMP","rev_l":45.0,"bu":"Jewellery"},
-        {"name":"P N Gadgil Jewellers","rev_l":45.0,"bu":"Jewellery"},
-        {"name":"Netplay","rev_l":41.0,"bu":"RRFB"},
-        {"name":"Adidas","rev_l":40.0,"bu":"Sportswear"},
-        {"name":"Kalyan Jewellers","rev_l":35.0,"bu":"Jewellery"},
-        {"name":"Teamspirit","rev_l":31.0,"bu":"RRFB"},
-        {"name":"Augmont","rev_l":30.0,"bu":"Jewellery"},
-        {"name":"RSBL","rev_l":30.0,"bu":"Jewellery"},
-        {"name":"WHP Jewellers","rev_l":25.0,"bu":"Jewellery"},
-        {"name":"Superdry","rev_l":20.0,"bu":"Gold RBL"},
-        {"name":"Malabar Gold","rev_l":20.0,"bu":"Jewellery"}
+        {
+          "name": "Samsung (Jio Platforms)",
+          "rev_l": 170.0
+        },
+        {
+          "name": "Muthoot Pappachan",
+          "rev_l": 60.0
+        },
+        {
+          "name": "Avaasa Mix n Match",
+          "rev_l": 55.0
+        },
+        {
+          "name": "DNMX",
+          "rev_l": 45.0
+        },
+        {
+          "name": "MMTC PAMP",
+          "rev_l": 45.0
+        },
+        {
+          "name": "P N Gadgil Jewellers",
+          "rev_l": 45.0
+        },
+        {
+          "name": "Netplay",
+          "rev_l": 41.0
+        },
+        {
+          "name": "Adidas",
+          "rev_l": 40.0
+        },
+        {
+          "name": "Kalyan Jewellers",
+          "rev_l": 35.0
+        },
+        {
+          "name": "Teamspirit",
+          "rev_l": 31.0
+        },
+        {
+          "name": "Augmont",
+          "rev_l": 30.0
+        },
+        {
+          "name": "RSBL",
+          "rev_l": 30.0
+        },
+        {
+          "name": "WHP Jewellers",
+          "rev_l": 25.0
+        },
+        {
+          "name": "Superdry",
+          "rev_l": 20.0
+        },
+        {
+          "name": "Malabar Gold",
+          "rev_l": 20.0
+        }
       ],
       "portfolios": [
-        {"name":"Non Apps / Jewellery","rev":2.96},{"name":"RRFB","rev":2.20},
-        {"name":"Non-Endemic","rev":1.70},{"name":"EB Apparels","rev":0.84},
-        {"name":"Sportswear Ftwr","rev":0.68},{"name":"National / Premium","rev":0.49},
-        {"name":"QPL","rev":0.39},{"name":"Kids","rev":0.18},{"name":"Others","rev":1.61}
+        {
+          "name": "Non Apps / Jewellery",
+          "rev": 2.96
+        },
+        {
+          "name": "RRFB",
+          "rev": 2.2
+        },
+        {
+          "name": "Non-Endemic",
+          "rev": 1.7
+        },
+        {
+          "name": "EB Apparels",
+          "rev": 0.84
+        },
+        {
+          "name": "Sportswear Ftwr",
+          "rev": 0.68
+        },
+        {
+          "name": "National / Premium",
+          "rev": 0.49
+        },
+        {
+          "name": "QPL",
+          "rev": 0.39
+        },
+        {
+          "name": "Kids",
+          "rev": 0.18
+        },
+        {
+          "name": "Others",
+          "rev": 1.61
+        }
       ],
       "bu_split": [
-        {"bu":"Jewellery","total":337,"active":45,"rev":2.960,"target":2.00},
-        {"bu":"RRFB","total":155,"active":25,"rev":2.200,"target":4.29},
-        {"bu":"Non-Endemic","total":16,"active":3,"rev":1.700,"target":0},
-        {"bu":"Emerging Brands MP","total":3857,"active":400,"rev":1.210,"target":5.32},
-        {"bu":"Sportswear","total":30,"active":12,"rev":0.906,"target":3.56},
-        {"bu":"National Brands","total":83,"active":38,"rev":0.492,"target":2.55},
-        {"bu":"HBLTA","total":660,"active":60,"rev":0.448,"target":0.46},
-        {"bu":"QPL","total":12,"active":8,"rev":0.394,"target":0.78},
-        {"bu":"Gold Non RBL","total":36,"active":9,"rev":0.260,"target":0.75},
-        {"bu":"Kids","total":1114,"active":48,"rev":0.178,"target":1.26},
-        {"bu":"Ajiogram","total":280,"active":22,"rev":0.140,"target":0.89},
-        {"bu":"IW&LW","total":718,"active":42,"rev":0.123,"target":0.64},
-        {"bu":"Beauty","total":680,"active":30,"rev":0.088,"target":1.63},
-        {"bu":"Watches & SG","total":268,"active":18,"rev":0.090,"target":1.80},
-        {"bu":"Gold RBL","total":54,"active":4,"rev":0.013,"target":1.03},
-        {"bu":"AJIO LUXE","total":413,"active":8,"rev":0.022,"target":1.47}
+        {
+          "bu": "Jewellery",
+          "total": 337,
+          "active": 45,
+          "rev": 2.96,
+          "target": 2.0
+        },
+        {
+          "bu": "RRFB",
+          "total": 155,
+          "active": 25,
+          "rev": 2.2,
+          "target": 4.29
+        },
+        {
+          "bu": "Non-Endemic",
+          "total": 16,
+          "active": 3,
+          "rev": 1.7,
+          "target": 0
+        },
+        {
+          "bu": "Emerging Brands MP",
+          "total": 3857,
+          "active": 400,
+          "rev": 1.21,
+          "target": 5.32
+        },
+        {
+          "bu": "Sportswear",
+          "total": 30,
+          "active": 12,
+          "rev": 0.906,
+          "target": 3.56
+        },
+        {
+          "bu": "National Brands",
+          "total": 83,
+          "active": 38,
+          "rev": 0.492,
+          "target": 2.55
+        },
+        {
+          "bu": "HBLTA",
+          "total": 660,
+          "active": 60,
+          "rev": 0.448,
+          "target": 0.46
+        },
+        {
+          "bu": "QPL",
+          "total": 12,
+          "active": 8,
+          "rev": 0.394,
+          "target": 0.78
+        },
+        {
+          "bu": "Gold Non RBL",
+          "total": 36,
+          "active": 9,
+          "rev": 0.26,
+          "target": 0.75
+        },
+        {
+          "bu": "Kids",
+          "total": 1114,
+          "active": 48,
+          "rev": 0.178,
+          "target": 1.26
+        },
+        {
+          "bu": "Ajiogram",
+          "total": 280,
+          "active": 22,
+          "rev": 0.14,
+          "target": 0.89
+        },
+        {
+          "bu": "IW&LW",
+          "total": 718,
+          "active": 42,
+          "rev": 0.123,
+          "target": 0.64
+        },
+        {
+          "bu": "Beauty",
+          "total": 680,
+          "active": 30,
+          "rev": 0.088,
+          "target": 1.63
+        },
+        {
+          "bu": "Watches & SG",
+          "total": 268,
+          "active": 18,
+          "rev": 0.09,
+          "target": 1.8
+        },
+        {
+          "bu": "Gold RBL",
+          "total": 54,
+          "active": 4,
+          "rev": 0.013,
+          "target": 1.03
+        },
+        {
+          "bu": "AJIO LUXE",
+          "total": 413,
+          "active": 8,
+          "rev": 0.022,
+          "target": 1.47
+        }
       ],
       "non_endemic": [
-        {"name":"Samsung (via Jio Platforms)","rev":1.70,"objective":"Brand awareness · Suit Yourself microdrama","status":"Closed"},
-        {"name":"Dentsu Media","rev":0.25,"objective":"Display · agency network","status":"Closed"}
+        {
+          "name": "Samsung (via Jio Platforms)",
+          "rev": 1.7,
+          "objective": "Brand awareness \u00b7 Suit Yourself microdrama",
+          "status": "Closed"
+        },
+        {
+          "name": "Dentsu Media",
+          "rev": 0.25,
+          "objective": "Display \u00b7 agency network",
+          "status": "Closed"
+        }
       ]
     },
     "Jun26": {
       "label": "Jun '26",
-      "ads_rev": 9.784,
+      "ads_rev": 9.833,
       "ads_target": 31.31,
-      "ach_pct": 31.2,
-      "active_brands": 1380,
+      "ach_pct": 31.4,
+      "active_brands": 1382,
       "total_platform_brands": 9595,
       "platform_nsv": 823.0,
       "nsv_type": "target",
+      "nsv_src": "AOP (Review Deck)",
       "nsv_jewellery": 200.0,
       "nsv_shein": 2.0,
       "nsv_rrfb": 95.0,
       "ads_pct_nsv": 1.19,
-      "ads_pct_ex_jwl": 1.57,
-      "ads_pct_ex_shein": 1.20,
-      "ads_pct_ex_rrfb": 1.34,
+      "ads_pct_ex_jwl": 1.58,
+      "ads_pct_ex_shein": 1.2,
+      "ads_pct_ex_rrfb": 1.35,
       "ads_pct_ex_shein_jwl": 1.59,
       "ads_pct_ex_shein_rrfb": 1.36,
-      "ads_pct_ex_jwl_rrfb": 1.73,
-      "ads_pct_ex_all": 1.86,
+      "ads_pct_ex_jwl_rrfb": 1.74,
+      "ads_pct_ex_all": 1.87,
       "retention": {
-        "m1_brand_pct": 81.8,
-        "m1_rev_pct": 109.6,
-        "new_advertiser_pct": 21.2,
-        "new_advertiser_rev": 4.02,
+        "m1_brand_pct": 81.9,
+        "m1_rev_pct": 110.1,
+        "new_advertiser_pct": 21.3,
+        "new_advertiser_rev": 4.045,
         "new_advertiser_rev_pct": 41.1,
-        "note": "81.8% of May brands returned · M1 revenue retention: 109.6%"
+        "note": "81.9% of May brands returned \u00b7 M1 revenue retention strong at 110.1%"
       },
-      "tier": { "lcs": {"active":80,"rev":5.977}, "growth": {"active":102,"rev":1.808}, "longtail": {"active":1198,"rev":1.999} },
+      "tier": {
+        "lcs": {
+          "active": 80,
+          "rev": 5.977
+        },
+        "growth": {
+          "active": 102,
+          "rev": 1.808
+        },
+        "longtail": {
+          "active": 1200,
+          "rev": 2.048
+        }
+      },
       "top_brands": [
-        {"name":"Muthoot Pappachan","rev_l":48.96,"bu":"Jewellery"},
-        {"name":"Buda Jeans Co","rev_l":44.08,"bu":"QPL"},
-        {"name":"Snitch","rev_l":38.50,"bu":"Emerging Brands MP"},
-        {"name":"Superdry","rev_l":23.76,"bu":"Gold RBL"},
-        {"name":"Svaraa","rev_l":21.55,"bu":"Emerging Brands PL"},
-        {"name":"Armani Exchange","rev_l":21.06,"bu":"Gold RBL"},
-        {"name":"Avaasa Mix n Match","rev_l":20.50,"bu":"RRFB"},
-        {"name":"GAP","rev_l":18.98,"bu":"Gold Non RBL"},
-        {"name":"Wrogn","rev_l":18.50,"bu":"National Brands"},
-        {"name":"MAX","rev_l":17.96,"bu":"Emerging Brands MP"},
-        {"name":"U.S. Polo Assn.","rev_l":16.68,"bu":"National Brands"},
-        {"name":"DNMX","rev_l":16.40,"bu":"RRFB"},
-        {"name":"Neonomad","rev_l":16.24,"bu":"Emerging Brands PL"},
-        {"name":"Augmont","rev_l":16.14,"bu":"Jewellery"},
-        {"name":"Flying Machine","rev_l":15.26,"bu":"National Brands"}
+        {
+          "name": "Muthoot Pappachan",
+          "rev_l": 48.96
+        },
+        {
+          "name": "Buda Jeans Co",
+          "rev_l": 44.08
+        },
+        {
+          "name": "Snitch",
+          "rev_l": 38.5
+        },
+        {
+          "name": "Superdry",
+          "rev_l": 23.76
+        },
+        {
+          "name": "Svaraa",
+          "rev_l": 21.55
+        },
+        {
+          "name": "Armani Exchange",
+          "rev_l": 21.06
+        },
+        {
+          "name": "Avaasa Mix n Match",
+          "rev_l": 20.5
+        },
+        {
+          "name": "GAP",
+          "rev_l": 18.98
+        },
+        {
+          "name": "Wrogn",
+          "rev_l": 18.5
+        },
+        {
+          "name": "MAX",
+          "rev_l": 17.96
+        },
+        {
+          "name": "U.S. Polo Assn.",
+          "rev_l": 17.34
+        },
+        {
+          "name": "DNMX",
+          "rev_l": 16.4
+        },
+        {
+          "name": "Neonomad",
+          "rev_l": 16.24
+        },
+        {
+          "name": "Augmont",
+          "rev_l": 16.14
+        },
+        {
+          "name": "Flying Machine",
+          "rev_l": 15.26
+        }
       ],
       "portfolios": [
-        {"name":"EB Apparels","rev":2.37},{"name":"Non Apps / HBLTA / W&S","rev":1.40},
-        {"name":"National / Premium","rev":1.27},{"name":"RRFB","rev":0.82},
-        {"name":"Gold RBL","rev":0.67},{"name":"EB Footwear","rev":0.64},
-        {"name":"QPL","rev":0.63},{"name":"Gold Non RBL","rev":0.62},
-        {"name":"IW & LW","rev":0.34},{"name":"Kids","rev":0.34},{"name":"Others","rev":0.61}
+        {
+          "name": "EB Apparels",
+          "rev": 2.37
+        },
+        {
+          "name": "Non Apps / HBLTA / W&S",
+          "rev": 1.4
+        },
+        {
+          "name": "National / Premium",
+          "rev": 1.27
+        },
+        {
+          "name": "RRFB",
+          "rev": 0.82
+        },
+        {
+          "name": "Gold RBL",
+          "rev": 0.67
+        },
+        {
+          "name": "EB Footwear",
+          "rev": 0.64
+        },
+        {
+          "name": "QPL",
+          "rev": 0.63
+        },
+        {
+          "name": "Gold Non RBL",
+          "rev": 0.62
+        },
+        {
+          "name": "IW & LW",
+          "rev": 0.37
+        },
+        {
+          "name": "Kids",
+          "rev": 0.36
+        },
+        {
+          "name": "Others",
+          "rev": 0.61
+        }
       ],
       "bu_split": [
-        {"bu":"Emerging Brands MP","total":3857,"active":673,"rev":2.081,"target":5.32},
-        {"bu":"Jewellery","total":337,"active":37,"rev":0.757,"target":2.00},
-        {"bu":"National Brands","total":83,"active":41,"rev":1.438,"target":2.55},
-        {"bu":"RRFB","total":155,"active":8,"rev":0.820,"target":4.29},
-        {"bu":"AJIO LUXE","total":413,"active":16,"rev":0.812,"target":1.47},
-        {"bu":"Gold RBL","total":54,"active":11,"rev":0.785,"target":1.03},
-        {"bu":"QPL","total":12,"active":8,"rev":0.702,"target":0.78},
-        {"bu":"Gold Non RBL","total":36,"active":15,"rev":0.607,"target":0.75},
-        {"bu":"Kids","total":1114,"active":92,"rev":0.648,"target":1.26},
-        {"bu":"Ajiogram","total":280,"active":33,"rev":0.418,"target":0.89},
-        {"bu":"Emerging Brands PL","total":5,"active":5,"rev":0.400,"target":0.50},
-        {"bu":"IW&LW","total":718,"active":97,"rev":0.329,"target":0.64},
-        {"bu":"Sportswear","total":30,"active":8,"rev":0.247,"target":3.56},
-        {"bu":"Beauty","total":680,"active":59,"rev":0.119,"target":1.63},
-        {"bu":"HBLTA","total":660,"active":80,"rev":0.108,"target":0.46},
-        {"bu":"Watches & SG","total":268,"active":20,"rev":0.063,"target":1.80},
-        {"bu":"Home","total":420,"active":41,"rev":0.060,"target":0.30}
+        {
+          "bu": "Emerging Brands MP",
+          "total": 3857,
+          "active": 673,
+          "rev": 2.081,
+          "target": 5.32
+        },
+        {
+          "bu": "National Brands",
+          "total": 83,
+          "active": 41,
+          "rev": 1.438,
+          "target": 2.55
+        },
+        {
+          "bu": "AJIO LUXE",
+          "total": 413,
+          "active": 16,
+          "rev": 0.812,
+          "target": 1.47
+        },
+        {
+          "bu": "RRFB",
+          "total": 155,
+          "active": 8,
+          "rev": 0.82,
+          "target": 4.29
+        },
+        {
+          "bu": "Gold RBL",
+          "total": 54,
+          "active": 11,
+          "rev": 0.785,
+          "target": 1.03
+        },
+        {
+          "bu": "Jewellery",
+          "total": 337,
+          "active": 37,
+          "rev": 0.757,
+          "target": 2.0
+        },
+        {
+          "bu": "QPL",
+          "total": 12,
+          "active": 8,
+          "rev": 0.702,
+          "target": 0.78
+        },
+        {
+          "bu": "Gold Non RBL",
+          "total": 36,
+          "active": 15,
+          "rev": 0.607,
+          "target": 0.75
+        },
+        {
+          "bu": "Kids",
+          "total": 1114,
+          "active": 92,
+          "rev": 0.648,
+          "target": 1.26
+        },
+        {
+          "bu": "Ajiogram",
+          "total": 280,
+          "active": 33,
+          "rev": 0.418,
+          "target": 0.89
+        },
+        {
+          "bu": "Emerging Brands PL",
+          "total": 5,
+          "active": 5,
+          "rev": 0.4,
+          "target": 0.5
+        },
+        {
+          "bu": "IW&LW",
+          "total": 718,
+          "active": 97,
+          "rev": 0.329,
+          "target": 0.64
+        },
+        {
+          "bu": "Sportswear",
+          "total": 30,
+          "active": 8,
+          "rev": 0.247,
+          "target": 3.56
+        },
+        {
+          "bu": "Beauty",
+          "total": 680,
+          "active": 59,
+          "rev": 0.119,
+          "target": 1.63
+        },
+        {
+          "bu": "HBLTA",
+          "total": 660,
+          "active": 80,
+          "rev": 0.108,
+          "target": 0.46
+        },
+        {
+          "bu": "Watches & SG",
+          "total": 268,
+          "active": 20,
+          "rev": 0.063,
+          "target": 1.8
+        },
+        {
+          "bu": "Home",
+          "total": 420,
+          "active": 41,
+          "rev": 0.06,
+          "target": 0.3
+        }
       ],
       "non_endemic": [
-        {"name":"Dentsu Media India","rev":0.09,"objective":"Display · agency network","status":"Active"},
-        {"name":"Samsung (pipeline)","rev":2.25,"objective":"Brand awareness · continuation","status":"Pipeline"}
+        {
+          "name": "Dentsu Media India",
+          "rev": 0.09,
+          "objective": "Display \u00b7 agency network",
+          "status": "Active"
+        },
+        {
+          "name": "Samsung (pipeline)",
+          "rev": 2.25,
+          "objective": "Brand awareness \u00b7 continuation",
+          "status": "Pipeline"
+        }
       ]
     }
   },
   "ytd": {
     "q1_target": 69.43,
-    "q1_actual": 28.77,
-    "q1_ach_pct": 41.4,
+    "q1_actual": 28.815,
+    "q1_ach_pct": 41.5,
     "fy27_annual_target": 443.7,
     "fy26_q1_actual": 27.24,
-    "yoy_pct": 5.6
+    "yoy_pct": 5.8
   }
 }
