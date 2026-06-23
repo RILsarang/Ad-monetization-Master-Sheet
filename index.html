@@ -41,6 +41,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .m-sel{display:flex;background:var(--bg);border:1px solid var(--bd2);border-radius:20px;padding:3px;gap:2px}
 .ms{padding:5px 16px;border-radius:16px;font-size:11px;font-weight:500;cursor:pointer;color:var(--muted);background:none;border:none;transition:all .15s}
 .ms:hover{color:var(--ink)}.ms.on{background:var(--s4);color:var(--accent2);box-shadow:0 0 0 1px #3D8EF044}
+.ms.future{color:var(--hint);font-style:italic}
+@media print {
+  body { background: #fff !important; }
+  .tabs, .ctrl, .hp { display: none !important; }
+  .pane { display: block !important; page-break-after: always; padding: 12px !important; }
+  .card, .kpi { border: 1px solid #ccc !important; background: #fff !important; }
+  * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hdr { background: #0D1520 !important; }
+  .hdr * { color: #fff !important; }
+}
 .cb{font-size:11px;padding:5px 14px;border-radius:20px;border:1px solid var(--bd2);background:var(--s2);color:var(--muted);cursor:pointer;transition:all .15s;font-weight:500}
 .cb:hover{border-color:var(--bd3);color:var(--ink)}.cb.on{background:var(--s4);color:var(--accent2);border-color:#3D8EF044}
 .csep{width:1px;height:18px;background:var(--bd);flex-shrink:0}.csp{flex:1}
@@ -153,15 +163,18 @@ tfoot td:first-child{text-align:left}
   <div class="tabs">
     <div class="tab on" onclick="goTab('ov',this)">Overview</div>
     <div class="tab" onclick="goTab('bu',this)">BU Split</div>
+    <div class="tab" onclick="goTab('kam',this)">KAM View</div>
     <div class="tab" onclick="goTab('ex',this)">NSV Exclusions</div>
+    <div class="tab" onclick="goTab('unlock',this)">Unlocks</div>
     <div class="tab" onclick="goTab('ne',this)">Non-Endemic</div>
     <div class="tsep"></div>
-    <div class="tab" onclick="goTab('ytd',this)">Q1 YTD</div>
+    <div class="tab" onclick="goTab('ytd',this)">Q1 + JAS YTD</div>
   </div>
 
   <div class="ctrl">
     <span class="cl">Month</span>
     <div class="m-sel" id="month-sel"></div>
+    <button class="cb" onclick="toggleCompare()" id="cmpBtn" style="margin-left:4px"><i class="ti ti-arrows-left-right" style="font-size:12px;vertical-align:-1px;margin-right:3px" aria-hidden="true"></i>Compare</button>
     <div class="csep"></div>
     <span class="cl">BU Filter</span>
     <button class="cb on" onclick="setFilterMode('all')" id="fAll">All BUs</button>
@@ -171,6 +184,9 @@ tfoot td:first-child{text-align:left}
     <button class="cb on" onclick="sortBU('rev',this)" id="sRev">Revenue</button>
     <button class="cb" onclick="sortBU('ach',this)" id="sAch">Ach %</button>
     <button class="cb" onclick="sortBU('act',this)" id="sAct">Active %</button>
+    <button class="cb" onclick="sortBU('gap',this)" id="sGap">Gap to Target</button>
+    <div class="csep"></div>
+    <button class="cb" onclick="exportPDF()" id="exportBtn"><i class="ti ti-download" style="font-size:13px;vertical-align:-2px;margin-right:3px" aria-hidden="true"></i>Export</button>
     <div class="csp"></div>
     <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--hint)"><div class="ld"></div><span id="ctrlTime">—</span></div>
   </div>
@@ -256,6 +272,36 @@ tfoot td:first-child{text-align:left}
     <div class="card"><div style="display:flex;align-items:center;gap:10px;padding:6px 0"><div style="font-size:18px;color:var(--hint)">⬜</div><div><div style="font-size:12px;color:var(--muted)">HP Roadblock takeovers — data pending</div><div class="note">Supply team tracks HP takeover bookings separately.</div></div><span class="pend">⏳ Pending</span></div></div>
   </div>
 
+  <div class="pane" id="pane-kam">
+    <div class="sh"><div class="sb"></div><div class="st" id="kam-st">KAM-wise performance</div></div>
+    <div class="g5" id="kam-cards" style="margin-bottom:18px"></div>
+    <div class="g2">
+      <div class="card"><div class="ct">Revenue by KAM (₹ Cr)</div><div class="bl" id="kam-rev-bar"></div></div>
+      <div class="card"><div class="ct">Achievement % by KAM</div><div class="bl" id="kam-ach-bar"></div></div>
+    </div>
+    <div class="note" style="margin-top:4px">KAM portfolios: Sarang (National Brands, IW&LW, Kids) · Satish (EB-MP, EB-PL, Ajiogram) · Arpit (HBLTA, W&SG, Sportswear, Jewellery) · Niharika (Gold RBL/Non-RBL, QPL) · Bhawana (Beauty, Home, Luxe, Shein)</div>
+  </div>
+
+  <div class="pane" id="pane-unlock">
+    <div class="sh"><div class="sb"></div><div class="st">Monetization unlock opportunities</div>
+      <div class="sr" id="unlock-total" style="font-size:11px;color:var(--muted)"></div>
+    </div>
+    <div class="note" style="margin-bottom:12px">Brands with significant NSV but blocked from monetizing — these are your biggest near-term revenue recovery opportunities, surfaced from the Flag/Issue tracker.</div>
+    <div class="card" style="margin-bottom:16px">
+      <div style="overflow-x:auto">
+        <table style="min-width:600px">
+          <thead><tr>
+            <th style="text-align:left">Brand</th><th style="text-align:left">BU</th>
+            <th>Jun NSV (₹ Cr)</th><th>Current Monet</th><th style="text-align:left">Blocker</th>
+          </tr></thead>
+          <tbody id="unlock-tb"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="sh"><div class="sb"></div><div class="st">Blocker summary</div></div>
+    <div class="g4" id="flag-cards"></div>
+  </div>
+
   <div class="pane" id="pane-ytd">
     <div class="g5" id="ytd-kpis"></div>
     <div class="sh"><div class="sb"></div><div class="st">Q1 monthly performance</div></div>
@@ -272,24 +318,44 @@ tfoot td:first-child{text-align:left}
 </div>
 
 <script>
-const DATA_URL = 'https://api.github.com/repos/RILsarang/Ad-monetization-Master-Sheet/contents/dashboard_data.json';
-// If hosting on SharePoint, use the full URL e.g.:
 
+// If hosting on SharePoint, use the full URL e.g.:
 let D = null;
 let curM = null;
 let sortKey = 'rev';
-const MONTH_KEYS = ['Apr26','May26','Jun26'];
+const MONTH_KEYS = ['Apr26','May26','Jun26','Jul26','Aug26','Sep26'];
 
 async function loadData() {
-  try {
-    const resp = await fetch(DATA_URL, {headers: {Accept: 'application/vnd.github.v3.raw'}});
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    D = await resp.json();
-    initDashboard();
-  } catch(e) {
-    document.getElementById('loading-screen').innerHTML =
-      '<div class="err">Could not load dashboard_data.json<br><small style="opacity:.7">' + e.message + '</small></div>';
+  // Try multiple sources in order — first one to succeed wins
+  const URLS = [
+    // Same-origin relative path (works when both files in same GitHub repo)
+    './dashboard_data.json',
+    // GitHub Pages direct (no CORS issue since same origin)
+    '/Ad-monetization-Master-Sheet/dashboard_data.json',
+  ];
+
+  for (const url of URLS) {
+    try {
+      const resp = await fetch(url + '?v=' + Date.now());
+      if (!resp.ok) continue;
+      const text = await resp.text();
+      D = JSON.parse(text);
+      initDashboard();
+      return;
+    } catch(e) {
+      continue;
+    }
   }
+
+  // All failed — show helpful error
+  document.getElementById('loading-screen').innerHTML =
+    `<div class="err">
+      <strong>Could not load dashboard data</strong><br>
+      <small style="opacity:.7;display:block;margin-top:6px">
+        Make sure <code>dashboard_data.json</code> is in the same GitHub repo as <code>index.html</code>.<br>
+        Both files must be in the root of the <code>main</code> branch.
+      </small>
+    </div>`;
 }
 
 function initDashboard() {
@@ -308,6 +374,8 @@ function initDashboard() {
     if (!m) return;
     const btn = document.createElement('button');
     btn.className = 'ms' + (k === 'Jun26' ? ' on' : '');
+    // Grey out future months
+    if(D.months[k] && D.months[k].is_future) btn.style.opacity = '0.55';
     btn.textContent = m.label;
     btn.onclick = () => setM(k, btn);
     sel.appendChild(btn);
@@ -329,12 +397,13 @@ function prevKey(k) { const i = MONTH_KEYS.indexOf(k); return i > 0 ? MONTH_KEYS
 
 function getFilteredMonthData(monthKey) {
   const m = D.months[monthKey];
+  if (!m) return null;
   const active = getActiveBUs();
-  if (!active) return m; // All mode — return full data
+  if (!active) return m;
   if (active.size === 0) return {...m, ads_rev:0, active_brands:0, bu_split:[]};
-  const filtered_bu = m.bu_split.filter(b => active.has(b.bu));
-  const ads_rev = filtered_bu.reduce((s,b) => s+b.rev, 0);
-  const active_brands = filtered_bu.reduce((s,b) => s+b.active, 0);
+  const filtered_bu = (m.bu_split||[]).filter(b => active.has(b.bu));
+  const ads_rev = filtered_bu.reduce((s,b) => s+(b.rev||0), 0);
+  const active_brands = filtered_bu.reduce((s,b) => s+(b.active||0), 0);
   return {...m, ads_rev: round2(ads_rev), active_brands, bu_split: filtered_bu};
 }
 
@@ -343,11 +412,16 @@ function round2(n) { return Math.round(n * 100) / 100; }
 function buildKPIs() {
   const m = getFilteredMonthData(curM);
   document.getElementById('kpis').innerHTML = [
-    {l:"Ads revenue",v:`₹${f2(m.ads_rev)} Cr`,s:`Target ₹${f2(m.ads_target)} Cr`,chip:`${f1(m.ach_pct)}% of AOP`,cc:m.ach_pct>=90?'cg':m.ach_pct>=60?'ca':'cr',acc:m.ach_pct>=90?'g':m.ach_pct>=60?'a':'r'},
-    {l:"Platform NSV",v:`₹${f1(m.platform_nsv)} Cr`,s:m.nsv_type,chip:`Ads %: ${f2(m.ads_pct_nsv)}%`,cc:'cb2',acc:''},
+    {l: m.is_future ? "Monetisation Target" : "Ads revenue",
+     v: m.is_future ? `₹${f2(m.ads_target)} Cr` : `₹${f2(m.ads_rev)} Cr`,
+     s: m.is_future ? `NSV target: ₹${f1(m.platform_nsv)} Cr` : `Target ₹${f2(m.ads_target)} Cr`,
+     chip: m.is_future ? `${f2(m.platform_nsv > 0 ? m.ads_target/m.platform_nsv*100 : 0)}% of NSV` : `${f1(m.ach_pct)}% of AOP`,
+     cc:m.is_future?'cb2':m.ach_pct>=90?'cg':m.ach_pct>=60?'ca':'cr',
+     acc:m.is_future?'':m.ach_pct>=90?'g':m.ach_pct>=60?'a':'r'},
+    {l:"Ads % NSV (ex-Jewellery)",v:`${f2(m.ads_pct_ex_jwl)}%`,s:`Headline monetisation metric`,chip:`Overall: ${f2(m.ads_pct_nsv)}%`,cc:'cg',acc:'g'},
+    {l:"Platform NSV",v:`₹${f1(m.platform_nsv)} Cr`,s:`${m.nsv_type} · Jwl ${f1(m.nsv_jewellery)} Cr (${f2(m.nsv_jewellery/m.platform_nsv*100)}%)`,chip:`ex-Jwl: ₹${f1(m.platform_nsv-m.nsv_jewellery)} Cr`,cc:'cb2',acc:'b'},
     {l:"Active advertisers",v:m.active_brands.toLocaleString(),s:`of ${m.total_platform_brands.toLocaleString()} platform brands`,chip:`${f2(m.active_brands/m.total_platform_brands*100)}% active`,cc:'ct2',acc:'t'},
-    {l:"ex-Jewellery NSV",v:`₹${f1(m.platform_nsv-m.nsv_jewellery)} Cr`,s:`Jwl share: ${f2(m.nsv_jewellery/m.platform_nsv*100)}%`,chip:`Ads %: ${f2(m.ads_pct_ex_jwl)}%`,cc:'cb2',acc:''},
-    {l:"Core NSV (ex-Jwl/Shein/RRFB)",v:`₹${f1(m.platform_nsv-m.nsv_jewellery-m.nsv_shein-m.nsv_rrfb)} Cr`,s:`Purest monetisation base`,chip:`Ads %: ${f2(m.ads_pct_ex_all)}%`,cc:'cg',acc:'g'},
+    {l:"Core NSV (ex-Jwl/Shein/RRFB)",v:`${f2(m.ads_pct_ex_all)}%`,s:`Purest base: ₹${f1(m.platform_nsv-m.nsv_jewellery-m.nsv_shein-m.nsv_rrfb)} Cr`,chip:`True ad density`,cc:'cg',acc:'g'},
   ].map(k=>`<div class="kpi ${k.acc}"><div class="kl">${k.l}</div><div class="kv">${k.v}</div><div class="ks">${k.s}</div><span class="chip ${k.cc}">${k.chip}</span></div>`).join('');
 }
 
@@ -363,7 +437,7 @@ function buildRevBars() {
       <div class="blbl">${m.label}</div>
       <div class="btrk">
         <div style="position:absolute;height:100%;width:${tw.toFixed(1)}%;background:var(--s3);border-radius:3px"></div>
-        <div class="bfil" style="position:relative;width:${Math.max(w,.5).toFixed(1)}%;background:${COLS[i]};z-index:1">${w>7?'₹'+f1(m.ads_rev)+'Cr':''}</div>
+        <div class="bfil" style="position:relative;width:${m.is_future?tw.toFixed(1):Math.max(w,.5).toFixed(1)}%;background:${m.is_future?'#4A607A':COLS[i]};z-index:1;opacity:${m.is_future?0.6:1}">${m.is_future?'Target ₹'+f1(m.ads_target)+'Cr':w>7?'₹'+f1(m.ads_rev)+'Cr':''}</div>
       </div>
       <div class="bv"><span class="pill ${ac(m.ach_pct)}">${f1(m.ach_pct)}%</span></div>
     </div>`;
@@ -424,10 +498,8 @@ function buildTierCard() {
 }
 
 function buildTopBrands() {
-  const fm = getFilteredMonthData(curM);
-  const activeBUs = new Set(fm.bu_split.map(b=>b.bu));
-  // If no filter, show all top brands; if filter active, show brands from active BUs only
-  const allBrands = D.months[curM].top_brands;
+  const allBrands = D.months[curM].top_brands || [];
+  if(!allBrands.length) { document.getElementById('top-b').innerHTML = '<div style="color:var(--hint);font-size:11px;padding:10px 0">No brand data for this month</div>'; document.getElementById('top-t').textContent = `Top brands — ${D.months[curM].label}`; return; }
   const activeBUs = getActiveBUs();
   const brands = activeBUs && activeBUs.size > 0
     ? allBrands.filter(b => !b.bu || activeBUs.has(b.bu))
@@ -465,6 +537,7 @@ function buildBUTable() {
   let bus = activeBUs ? [...m.bu_split].filter(b => activeBUs.has(b.bu)) : [...m.bu_split];
   if (sortKey==='rev') bus.sort((a,b) => b.rev-a.rev);
   else if (sortKey==='ach') bus.sort((a,b) => (b.target>0?b.rev/b.target:0)-(a.target>0?a.rev/a.target:0));
+  else if (sortKey==='gap') bus.sort((a,b) => (a.rev-a.target)-(b.rev-b.target));
   else bus.sort((a,b) => (b.active/b.total)-(a.active/a.total));
   document.getElementById('bu-st').textContent = `BU performance — ${m.label}`;
 
@@ -549,35 +622,46 @@ function buildNE() {
 function buildYTD() {
   const ytd = D.ytd;
   document.getElementById('ytd-kpis').innerHTML = [
-    {l:"Q1 revenue",v:`₹${f2(ytd.q1_actual)} Cr`,s:`Apr + May + Jun`,chip:`${f1(ytd.q1_ach_pct)}% of ₹${f2(ytd.q1_target)} Cr target`,cc:'ca',acc:'a'},
-    {l:"Q1 AOP target",v:`₹${f2(ytd.q1_target)} Cr`,s:`Gap: ₹${f2(ytd.q1_target-ytd.q1_actual)} Cr`,chip:`${f1(100-ytd.q1_ach_pct)}% remaining`,cc:'cr',acc:'r'},
-    {l:"Best month (Q1)",v:"May '26",s:"₹11.06 Cr · 52.5% ach",chip:"Highest of Q1",cc:'cg',acc:'g'},
-    {l:"YoY Q1",v:`+${ytd.yoy_pct}%`,s:`FY26 Q1: ₹${f2(ytd.fy26_q1_actual)} Cr`,chip:`FY27 Q1: ₹${f2(ytd.q1_actual)} Cr`,cc:'cg',acc:'g'},
+    {l:"Q1 FY27 actuals",v:`₹${f2(ytd.q1_actual)} Cr`,s:`Apr + May + Jun`,chip:`${f1(ytd.q1_ach_pct)}% of Q1 target`,cc:'ca',acc:'a'},
+    {l:"JAS targets (Jul–Sep)",v:`₹${f2(ytd.jas_targets?.jas_total||79.79)} Cr`,s:`Jul ${f2(ytd.jas_targets?.jul||24.27)} + Aug ${f2(ytd.jas_targets?.aug||25.72)} + Sep ${f2(ytd.jas_targets?.sep||29.8)}`,chip:"H1 total: ₹"+f2((ytd.q1_actual||0)+(ytd.jas_targets?.jas_total||79.79))+"Cr",cc:'cb2',acc:'b'},
+    {l:"Best month Q1",v:"May '26",s:`₹${f2(D.months['May26']?.ads_rev||11.06)} Cr · ${f1(D.months['May26']?.ach_pct||52.5)}% ach`,chip:"Highest Q1",cc:'cg',acc:'g'},
+    {l:"YoY Q1",v:`${ytd.yoy_pct>=0?'+':''}${ytd.yoy_pct}%`,s:`FY26 Q1: ₹${f2(ytd.fy26_q1_actual)} Cr`,chip:`FY27 Q1: ₹${f2(ytd.q1_actual)} Cr`,cc:ytd.yoy_pct>=0?'cg':'cr',acc:ytd.yoy_pct>=0?'g':'r'},
     {l:"FY27 run-rate needed",v:"₹46 Cr/mo",s:"Remaining 9 months",chip:`${f1(ytd.q1_actual/ytd.fy27_annual_target*100)}% of annual done`,cc:'cr',acc:'r'},
   ].map(k=>`<div class="kpi ${k.acc}"><div class="kl">${k.l}</div><div class="kv">${k.v}</div><div class="ks">${k.s}</div><span class="chip ${k.cc}">${k.chip}</span></div>`).join('');
 
-  const max = Math.max(...MONTH_KEYS.map(k=>D.months[k].ads_target));
-  const nsvMax = Math.max(...MONTH_KEYS.map(k=>D.months[k].ads_pct_nsv))*1.3;
-  const COLS = ['var(--accent)','var(--teal)','var(--green)'];
+  const max = Math.max(...MONTH_KEYS.map(k=>D.months[k]?.ads_target||0));
+  const nsvMax = Math.max(...MONTH_KEYS.map(k=>D.months[k]?.ads_pct_nsv||0),5)*1.3;
+  const COLS = ['var(--accent)','var(--teal)','var(--green)','#4A607A','#4A607A','#4A607A'];
 
   document.getElementById('ytd-rev').innerHTML = MONTH_KEYS.map((k,i)=>{
-    const m=D.months[k],w=m.ads_rev/max*100,tw=m.ads_target/max*100;
-    return`<div class="br"><div class="blbl">${m.label}<span class="src-tag">${m.nsv_type}</span></div>
+    const m = D.months[k]; if(!m) return '';
+    const w = m.ads_rev/max*100, tw = m.ads_target/max*100;
+    const annotations = {Apr26:'',May26:'Samsung deal',Jun26:'RRFB ramp',Jul26:'JAS target',Aug26:'JAS target',Sep26:'Aadi Sale'};
+    const ann = annotations[k] || '';
+    if(m.is_future) {
+      return `<div class="br"><div class="blbl">${m.label}${ann?'<span class="src-tag">'+ann+'</span>':''}</div>
+        <div class="btrk"><div class="bfil" style="width:${tw.toFixed(0)}%;background:#4A607A;opacity:0.6">Target ₹${f1(m.ads_target)}Cr</div></div>
+        <div class="bv" style="color:var(--hint)">tgt</div></div>`;
+    }
+    return `<div class="br"><div class="blbl">${m.label}${ann?'<span class="src-tag">'+ann+'</span>':''}</div>
       <div class="btrk">
         <div style="position:absolute;height:100%;width:${tw.toFixed(0)}%;background:var(--s3);border-radius:3px"></div>
-        <div class="bfil" style="position:relative;width:${Math.max(w,.5).toFixed(0)}%;background:${COLS[i]};z-index:1">${w>7?'₹'+f1(m.ads_rev)+'Cr':''}</div>
+        <div class="bfil" style="position:relative;width:${Math.max(w,.5).toFixed(0)}%;background:${COLS[i]||'var(--accent)'};z-index:1">${w>7?'₹'+f1(m.ads_rev)+'Cr':''}</div>
       </div>
-      <div class="bv"><span class="pill ${ac(m.ach_pct)}">${f1(m.ach_pct)}%</span></div>
-    </div>`;
+      <div class="bv"><span class="pill ${ac(m.ach_pct)}">${f1(m.ach_pct)}%</span></div></div>`;
   }).join('');
 
   document.getElementById('ytd-nsv').innerHTML = MONTH_KEYS.map((k,i)=>{
-    const m=D.months[k],w=m.ads_pct_nsv/nsvMax*100;
-    return`<div class="br"><div class="blbl">${m.label}</div><div class="btrk"><div class="bfil" style="width:${w.toFixed(0)}%;background:${COLS[i]}">${w>8?m.ads_pct_nsv+'%':''}</div></div><div class="bv">${m.ads_pct_nsv}%</div></div>`;
+    const m=D.months[k]; if(!m) return '';
+    const w=m.ads_pct_nsv/nsvMax*100;
+    const lbl = m.is_future ? m.label+' <span class="src-tag">tgt %</span>' : m.label;
+    const val = m.is_future ? f2(m.platform_nsv>0?m.ads_target/m.platform_nsv*100:0) : m.ads_pct_nsv;
+    const barW = m.is_future ? (val/nsvMax*100) : w;
+    return`<div class="br"><div class="blbl">${lbl}</div><div class="btrk"><div class="bfil" style="width:${Math.max(barW,2).toFixed(0)}%;background:${m.is_future?'#4A607A':COLS[i]||'var(--teal)'};opacity:${m.is_future?0.6:1}">${barW>8?val+'%':''}</div></div><div class="bv">${val}%</div></div>`;
   }).join('');
 
   const combined = {};
-  MONTH_KEYS.forEach(k=>getFilteredMonthData(k).bu_split.forEach(b=>{if(!combined[b.bu])combined[b.bu]=0;combined[b.bu]+=b.rev;}));
+  ['Apr26','May26','Jun26'].forEach(k=>{ const fm = getFilteredMonthData(k); if(fm && fm.bu_split) fm.bu_split.forEach(b=>{if(!combined[b.bu])combined[b.bu]=0;combined[b.bu]+=(b.rev||0);}); });
   const sortedBU = Object.entries(combined).sort((a,b)=>b[1]-a[1]).slice(0,10);
   const maxBU = sortedBU[0][1];
   document.getElementById('ytd-bu-rev').innerHTML = sortedBU.map(([bu,v],i)=>`<div class="br">
@@ -673,7 +757,10 @@ function getActiveBUs() {
 
 // rebuildAll recomputes everything respecting the BU filter
 function rebuildAll() {
+  buildKAM();
+  buildUnlocks();
   buildKPIs();
+  if(compareMode) buildCompareView();
   buildRevBars();
   buildAdvCard();
   buildRetCard();
@@ -686,10 +773,166 @@ function rebuildAll() {
   buildYTD();
 }
 
+
+let compareMode = false;
+let compareMonth = 'May26';
+
+function toggleCompare() {
+  compareMode = !compareMode;
+  document.getElementById('cmpBtn').classList.toggle('on', compareMode);
+  if(compareMode) {
+    // pick previous actual month as comparison
+    const idx = MONTH_KEYS.indexOf(curM);
+    compareMonth = idx > 0 ? MONTH_KEYS[idx-1] : MONTH_KEYS[idx+1];
+    showCompareBar();
+  } else {
+    const cb = document.getElementById('compare-bar');
+    if(cb) cb.style.display = 'none';
+  }
+  rebuildAll();
+}
+
+function showCompareBar() {
+  let cb = document.getElementById('compare-bar');
+  if(!cb) {
+    cb = document.createElement('div');
+    cb.id = 'compare-bar';
+    cb.className = 'ctrl';
+    cb.style.cssText = 'background:var(--s3);padding:8px 22px';
+    document.querySelector('.ctrl').after(cb);
+  }
+  cb.style.display = 'flex';
+  cb.innerHTML = '<span class="cl">Comparing</span><span style="font-size:12px;color:var(--accent2);font-weight:500">' +
+    D.months[curM].label + '</span><span style="color:var(--hint)">vs</span>' +
+    '<div class="m-sel" id="cmp-sel"></div>';
+  const sel = document.getElementById('cmp-sel');
+  MONTH_KEYS.forEach(k => {
+    if(k === curM) return;
+    const m = D.months[k]; if(!m) return;
+    const btn = document.createElement('button');
+    btn.className = 'ms' + (k === compareMonth ? ' on' : '');
+    btn.textContent = m.label;
+    if(m.is_future) btn.style.opacity = '0.55';
+    btn.onclick = () => { compareMonth = k; showCompareBar(); buildCompareView(); };
+    sel.appendChild(btn);
+  });
+  buildCompareView();
+}
+
+function buildCompareView() {
+  if(!compareMode) return;
+  const a = getFilteredMonthData(curM);
+  const b = getFilteredMonthData(compareMonth);
+  // Inject comparison into KPI row
+  const metrics = [
+    {l:'Ads revenue', av:a.ads_rev, bv:b.ads_rev, fmt:v=>'₹'+f2(v)+' Cr'},
+    {l:'Ads % NSV (ex-Jwl)', av:a.ads_pct_ex_jwl, bv:b.ads_pct_ex_jwl, fmt:v=>f2(v)+'%'},
+    {l:'Platform NSV', av:a.platform_nsv, bv:b.platform_nsv, fmt:v=>'₹'+f1(v)+' Cr'},
+    {l:'Active advertisers', av:a.active_brands, bv:b.active_brands, fmt:v=>v.toLocaleString()},
+    {l:'Achievement %', av:a.ach_pct, bv:b.ach_pct, fmt:v=>f1(v)+'%'},
+  ];
+  document.getElementById('kpis').innerHTML = metrics.map(mt=>{
+    const delta = mt.av - mt.bv;
+    const pct = mt.bv !== 0 ? (delta/mt.bv*100) : 0;
+    const up = delta >= 0;
+    return `<div class="kpi ${up?'g':'r'}">
+      <div class="kl">${mt.l}</div>
+      <div class="kv">${mt.fmt(mt.av)}</div>
+      <div class="ks">${D.months[compareMonth].label}: ${mt.fmt(mt.bv)}</div>
+      <span class="chip ${up?'cg':'cr'}">${up?'▲':'▼'} ${Math.abs(pct).toFixed(1)}%</span>
+    </div>`;
+  }).join('');
+}
+
+function buildKAM() {
+  if(!D.kam_mapping) return;
+  const m = D.months[curM];
+  if(m.is_future) {
+    document.getElementById('kam-cards').innerHTML = '<div style="grid-column:1/-1;color:var(--hint);font-size:12px;padding:20px;text-align:center">KAM breakdown available for actual months only (Apr–Jun)</div>';
+    document.getElementById('kam-rev-bar').innerHTML = '';
+    document.getElementById('kam-ach-bar').innerHTML = '';
+    return;
+  }
+  document.getElementById('kam-st').textContent = `KAM-wise performance — ${m.label}`;
+
+  const kamColors = {Sarang:'#3D8EF0',Satish:'#3ECF8E',Arpit:'#F5A623',Niharika:'#A06CD5',Bhawana:'#2DD4BF'};
+  const kamInitials = {Sarang:'SA',Satish:'ST',Arpit:'AR',Niharika:'NI',Bhawana:'BH'};
+
+  const kamStats = {};
+  Object.entries(D.kam_mapping).forEach(([kam, bus]) => {
+    let rev=0, target=0, active=0;
+    bus.forEach(buName => {
+      const bu = m.bu_split.find(b => b.bu === buName);
+      if(bu) { rev += bu.rev||0; target += bu.target||0; active += bu.active||0; }
+    });
+    kamStats[kam] = {rev:round2(rev), target:round2(target), active, ach: target>0?rev/target*100:0};
+  });
+
+  document.getElementById('kam-cards').innerHTML = Object.entries(kamStats).map(([kam,s]) => {
+    const c = kamColors[kam];
+    return `<div class="kpi" style="border-top:none"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:${c}"></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <div style="width:26px;height:26px;border-radius:50%;background:${c};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff;flex-shrink:0">${kamInitials[kam]}</div>
+        <div style="font-size:13px;font-weight:500">${kam}</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--muted)">Revenue</span><span style="font-weight:500">₹${f2(s.rev)} Cr</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--muted)">Target</span><span style="color:var(--muted)">₹${f2(s.target)} Cr</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:7px"><span style="color:var(--muted)">Active</span><span>${s.active}</span></div>
+      <div style="background:var(--bg);border:1px solid var(--bd);border-radius:4px;height:6px;overflow:hidden"><div style="width:${Math.min(s.ach,100)}%;height:100%;background:${c};border-radius:3px"></div></div>
+      <div style="text-align:right;font-size:11px;font-weight:500;margin-top:4px;color:${s.ach>=90?'var(--green)':s.ach>=60?'var(--amber)':'var(--red)'}">${f1(s.ach)}% ach</div>
+    </div>`;
+  }).join('');
+
+  const sorted = Object.entries(kamStats).sort((a,b)=>b[1].rev-a[1].rev);
+  const maxRev = sorted[0][1].rev;
+  document.getElementById('kam-rev-bar').innerHTML = sorted.map(([kam,s])=>`<div class="br">
+    <div class="blbl">${kam}</div>
+    <div class="btrk"><div class="bfil" style="width:${(s.rev/maxRev*100).toFixed(0)}%;background:${kamColors[kam]}">${s.rev>0.3?'₹'+f2(s.rev)+'Cr':''}</div></div>
+    <div class="bv">₹${f2(s.rev)}</div></div>`).join('');
+
+  const sortedAch = Object.entries(kamStats).sort((a,b)=>b[1].ach-a[1].ach);
+  document.getElementById('kam-ach-bar').innerHTML = sortedAch.map(([kam,s])=>{
+    const c = s.ach>=90?'#3ECF8E':s.ach>=60?'#F5A623':'#F06060';
+    return `<div class="br"><div class="blbl">${kam}</div>
+      <div class="btrk"><div class="bfil" style="width:${Math.min(s.ach,100).toFixed(0)}%;background:${c}">${f1(s.ach)}%</div></div>
+      <div class="bv">${f1(s.ach)}%</div></div>`;
+  }).join('');
+}
+
+function buildUnlocks() {
+  if(!D.unlocks) return;
+  const total = D.unlocks.reduce((s,u)=>s+u.nsv,0);
+  document.getElementById('unlock-total').textContent = `${D.unlocks.length} brands · ₹${f2(total)} Cr NSV at stake`;
+  document.getElementById('unlock-tb').innerHTML = D.unlocks.map(u=>{
+    const issueColor = u.issue==='No TOT'?'pr':u.issue==='Revise TOT'?'pa':u.issue==='Scale up'?'pb':'pa';
+    return `<tr>
+      <td style="font-weight:500">${u.brand}</td>
+      <td style="color:var(--muted)">${u.bu}</td>
+      <td style="font-weight:500">₹${f2(u.nsv)}</td>
+      <td style="color:${u.monet>0?'var(--green)':'var(--red)'}">${u.monet>0?'₹'+f2(u.monet):'₹0.00'}</td>
+      <td><span class="pill ${issueColor}">${u.issue}</span></td>
+    </tr>`;
+  }).join('');
+
+  if(D.flag_summary) {
+    const fc = {'No TOT':'#F06060','Revise TOT':'#F5A623','Scale up':'#3D8EF0','High Margin':'#A06CD5','Inventory Issue':'#F5A623','SPF Issue':'#F06060'};
+    document.getElementById('flag-cards').innerHTML = Object.entries(D.flag_summary).sort((a,b)=>b[1].nsv-a[1].nsv).map(([flag,d])=>`
+      <div class="kpi" style="border-top:none"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:${fc[flag]||'#7A90B0'}"></div>
+        <div class="kl">${flag}</div>
+        <div class="kv">${d.count}</div>
+        <div class="ks">brands · ₹${f2(d.nsv)} Cr NSV</div>
+      </div>`).join('');
+  }
+}
+
+function exportPDF() {
+  window.print();
+}
+
 function renderAll() { rebuildAll(); }
 function goTab(id,el) { document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));el.classList.add('on');document.getElementById('pane-'+id).classList.add('on'); }
 function setM(k,el) { curM=k;document.querySelectorAll('.m-sel .ms').forEach(b=>b.classList.remove('on'));el.classList.add('on');rebuildAll(); }
-function sortBU(k,el) { sortKey=k;['sRev','sAch','sAct'].forEach(id=>document.getElementById(id).classList.remove('on'));el.classList.add('on');buildBUTable(); }
+function sortBU(k,el) { sortKey=k;['sRev','sAch','sAct','sGap'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('on');});el.classList.add('on');buildBUTable(); }
 function tick() { const t=new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'});document.getElementById('liveT').textContent=t+' IST · Next refresh 9:00 AM';document.getElementById('ctrlTime').textContent=t+' IST'; }
 
 loadData();
