@@ -1,13 +1,15 @@
 {
   "meta": {
-    "last_updated": "2026-06-16T10:04:00+05:30",
-    "next_refresh": "2026-06-17T09:00:00+05:30",
+    "last_updated": "2026-06-23T10:30:00+05:30",
+    "next_refresh": "2026-06-24T09:00:00+05:30",
     "data_sources": {
-      "ads_revenue": "Package_Details_2026-06-16_1004.csv (rilcloud SharePoint)",
+      "ads_revenue": "Package_Details_2026-06-16 (rilcloud SharePoint)",
       "nsv_apr": "April_Booked_Revenue_2026.xlsx (actual)",
-      "nsv_may": "Master Brand Tracker col 25 (projected)",
-      "nsv_jun": "AOP target \u2014 Review Deck",
-      "bu_data": "Master Brand Tracker (sarang_pious_ril_com OneDrive)"
+      "nsv_may": "JAS_Master_V9 Sheet1 (actual \u20b9664.21 Cr)",
+      "nsv_jun": "JAS_Master_V9 Sheet1 (actual \u20b9823.4 Cr)",
+      "nsv_jas": "JAS_Master_V9 JAS AOP Plan (Jul/Aug/Sep targets)",
+      "bu_data": "Master Brand Tracker + JAS_Master_V9",
+      "notes": "Rejected packages excluded from ads revenue \u00b7 Approval status breakdown added per month"
     }
   },
   "months": {
@@ -17,21 +19,13 @@
       "ads_target": 16.65,
       "ach_pct": 47.6,
       "active_brands": 101,
-      "total_platform_brands": 9595,
+      "total_platform_brands": 8551,
       "platform_nsv": 576.47,
       "nsv_type": "actual",
       "nsv_src": "April_Booked_Revenue_2026.xlsx",
       "nsv_jewellery": 293.69,
       "nsv_shein": 2.23,
       "nsv_rrfb": 53.04,
-      "ads_pct_nsv": 1.37,
-      "ads_pct_ex_jwl": 2.8,
-      "ads_pct_ex_shein": 1.39,
-      "ads_pct_ex_rrfb": 1.51,
-      "ads_pct_ex_shein_jwl": 2.82,
-      "ads_pct_ex_shein_rrfb": 1.54,
-      "ads_pct_ex_jwl_rrfb": 3.11,
-      "ads_pct_ex_all": 3.48,
       "retention": null,
       "tier": {
         "lcs": {
@@ -155,121 +149,287 @@
         {
           "bu": "RRFB",
           "total": 155,
-          "active": 7,
+          "apr_active": 7,
+          "may_active": 8,
+          "jun_active": 8,
+          "apr_rev": 1.7,
+          "may_rev": 2.2,
+          "jun_rev": 0.82,
+          "jun_target": 4.29,
+          "jul_target": 2.53,
+          "aug_target": 2.9,
+          "sep_target": 3.08,
+          "jul_nsv": 72.26,
           "rev": 1.7,
-          "target": 4.29
+          "active": 7,
+          "target": 4.29,
+          "gap": -2.59
         },
         {
           "bu": "Jewellery",
           "total": 337,
-          "active": 7,
+          "apr_active": 7,
+          "may_active": 46,
+          "jun_active": 37,
+          "apr_rev": 1.569,
+          "may_rev": 3.048,
+          "jun_rev": 0.757,
+          "jun_target": 2.0,
+          "jul_target": 2.72,
+          "aug_target": 2.7,
+          "sep_target": 3.12,
+          "jul_nsv": 181.15,
           "rev": 1.569,
-          "target": 2.0
+          "active": 7,
+          "target": 2.0,
+          "gap": -0.431
         },
         {
           "bu": "National Brands",
           "total": 83,
-          "active": 8,
+          "apr_active": 8,
+          "may_active": 47,
+          "jun_active": 41,
+          "apr_rev": 1.067,
+          "may_rev": 1.089,
+          "jun_rev": 1.438,
+          "jun_target": 2.55,
+          "jul_target": 1.56,
+          "aug_target": 1.38,
+          "sep_target": 1.44,
+          "jul_nsv": 39.06,
           "rev": 1.067,
-          "target": 2.55
+          "active": 8,
+          "target": 2.55,
+          "gap": -1.483
         },
         {
           "bu": "Emerging Brands MP",
           "total": 3857,
-          "active": 16,
+          "apr_active": 16,
+          "may_active": 779,
+          "jun_active": 673,
+          "apr_rev": 0.845,
+          "may_rev": 2.083,
+          "jun_rev": 2.081,
+          "jun_target": 5.32,
+          "jul_target": 4.26,
+          "aug_target": 4.54,
+          "sep_target": 5.14,
+          "jul_nsv": 106.49,
           "rev": 0.845,
-          "target": 5.32
+          "active": 16,
+          "target": 5.32,
+          "gap": -4.475
         },
         {
           "bu": "QPL",
           "total": 12,
-          "active": 5,
+          "apr_active": 5,
+          "may_active": 7,
+          "jun_active": 8,
+          "apr_rev": 0.649,
+          "may_rev": 0.964,
+          "jun_rev": 0.702,
+          "jun_target": 0.78,
+          "jul_target": 0.68,
+          "aug_target": 0.74,
+          "sep_target": 0.78,
+          "jul_nsv": 22.59,
           "rev": 0.649,
-          "target": 0.78
+          "active": 5,
+          "target": 0.78,
+          "gap": -0.131
         },
         {
           "bu": "Gold RBL",
           "total": 54,
-          "active": 10,
+          "apr_active": 10,
+          "may_active": 16,
+          "jun_active": 11,
+          "apr_rev": 0.412,
+          "may_rev": 0.561,
+          "jun_rev": 0.785,
+          "jun_target": 1.03,
+          "jul_target": 0.78,
+          "aug_target": 0.69,
+          "sep_target": 0.74,
+          "jul_nsv": 25.99,
           "rev": 0.412,
-          "target": 1.03
-        },
-        {
-          "bu": "Sportswear",
-          "total": 30,
-          "active": 7,
-          "rev": 0.352,
-          "target": 3.56
+          "active": 10,
+          "target": 1.03,
+          "gap": -0.618
         },
         {
           "bu": "Gold Non RBL",
           "total": 36,
-          "active": 13,
+          "apr_active": 13,
+          "may_active": 16,
+          "jun_active": 15,
+          "apr_rev": 0.28,
+          "may_rev": 0.387,
+          "jun_rev": 0.607,
+          "jun_target": 0.75,
+          "jul_target": 0.52,
+          "aug_target": 0.52,
+          "sep_target": 0.58,
+          "jul_nsv": 13.12,
           "rev": 0.28,
-          "target": 0.75
+          "active": 13,
+          "target": 0.75,
+          "gap": -0.47
         },
         {
           "bu": "Kids",
           "total": 1114,
-          "active": 4,
+          "apr_active": 4,
+          "may_active": 132,
+          "jun_active": 92,
+          "apr_rev": 0.23,
+          "may_rev": 0.591,
+          "jun_rev": 0.648,
+          "jun_target": 1.26,
+          "jul_target": 0.95,
+          "aug_target": 0.96,
+          "sep_target": 1.17,
+          "jul_nsv": 23.83,
           "rev": 0.23,
-          "target": 1.26
+          "active": 4,
+          "target": 1.26,
+          "gap": -1.03
         },
         {
           "bu": "Ajiogram",
           "total": 280,
-          "active": 4,
+          "apr_active": 4,
+          "may_active": 56,
+          "jun_active": 33,
+          "apr_rev": 0.224,
+          "may_rev": 0.381,
+          "jun_rev": 0.418,
+          "jun_target": 0.89,
+          "jul_target": 0.7,
+          "aug_target": 0.7,
+          "sep_target": 0.85,
+          "jul_nsv": 17.62,
           "rev": 0.224,
-          "target": 0.89
+          "active": 4,
+          "target": 0.89,
+          "gap": -0.666
         },
         {
           "bu": "HBLTA",
           "total": 660,
-          "active": 6,
+          "apr_active": 6,
+          "may_active": 72,
+          "jun_active": 80,
+          "apr_rev": 0.147,
+          "may_rev": 0.436,
+          "jun_rev": 0.108,
+          "jun_target": 0.46,
+          "jul_target": 0.37,
+          "aug_target": 0.43,
+          "sep_target": 0.49,
+          "jul_nsv": 9.33,
           "rev": 0.147,
-          "target": 0.46
-        },
-        {
-          "bu": "Non-Endemic",
-          "total": 16,
-          "active": 2,
-          "rev": 0.105,
-          "target": 0
-        },
-        {
-          "bu": "Shein",
-          "total": 1,
-          "active": 1,
-          "rev": 0.1,
-          "target": 0.36
+          "active": 6,
+          "target": 0.46,
+          "gap": -0.313
         },
         {
           "bu": "IW&LW",
           "total": 718,
-          "active": 1,
+          "apr_active": 1,
+          "may_active": 133,
+          "jun_active": 97,
+          "apr_rev": 0.1,
+          "may_rev": 0.204,
+          "jun_rev": 0.329,
+          "jun_target": 0.64,
+          "jul_target": 0.46,
+          "aug_target": 0.47,
+          "sep_target": 0.59,
+          "jul_nsv": 11.5,
           "rev": 0.1,
-          "target": 0.64
+          "active": 1,
+          "target": 0.64,
+          "gap": -0.54
+        },
+        {
+          "bu": "Shein",
+          "total": 1,
+          "apr_active": 1,
+          "may_active": 1,
+          "jun_active": 0,
+          "apr_rev": 0.1,
+          "may_rev": 0.1,
+          "jun_rev": 0.0,
+          "jun_target": 0.36,
+          "jul_target": 0.25,
+          "aug_target": 0.35,
+          "sep_target": 0.38,
+          "jul_nsv": 8.96,
+          "rev": 0.1,
+          "active": 1,
+          "target": 0.36,
+          "gap": -0.26
         },
         {
           "bu": "Beauty",
           "total": 680,
-          "active": 4,
+          "apr_active": 4,
+          "may_active": 88,
+          "jun_active": 59,
+          "apr_rev": 0.075,
+          "may_rev": 0.127,
+          "jun_rev": 0.119,
+          "jun_target": 1.63,
+          "jul_target": 1.5,
+          "aug_target": 1.79,
+          "sep_target": 2.42,
+          "jul_nsv": 30.0,
           "rev": 0.075,
-          "target": 1.63
+          "active": 4,
+          "target": 1.63,
+          "gap": -1.555
         },
         {
           "bu": "Watches & SG",
           "total": 268,
-          "active": 3,
+          "apr_active": 3,
+          "may_active": 22,
+          "jun_active": 20,
+          "apr_rev": 0.054,
+          "may_rev": 0.148,
+          "jun_rev": 0.063,
+          "jun_target": 1.8,
+          "jul_target": 1.35,
+          "aug_target": 1.31,
+          "sep_target": 1.5,
+          "jul_nsv": 30.26,
           "rev": 0.054,
-          "target": 1.8
+          "active": 3,
+          "target": 1.8,
+          "gap": -1.746
         },
         {
           "bu": "Home",
           "total": 420,
-          "active": 3,
+          "apr_active": 3,
+          "may_active": 54,
+          "jun_active": 41,
+          "apr_rev": 0.01,
+          "may_rev": 0.035,
+          "jun_rev": 0.06,
+          "jun_target": 0.3,
+          "jul_target": 0.24,
+          "aug_target": 0.29,
+          "sep_target": 0.33,
+          "jul_nsv": 5.9,
           "rev": 0.01,
-          "target": 0.3
+          "active": 3,
+          "target": 0.3,
+          "gap": -0.29
         }
       ],
       "non_endemic": [
@@ -285,36 +445,43 @@
           "objective": "Test campaign",
           "status": "Closed"
         }
-      ]
+      ],
+      "ads_pct_nsv": 1.37,
+      "ads_pct_ex_jwl": 2.8,
+      "ads_pct_ex_shein": 1.38,
+      "ads_pct_ex_rrfb": 1.51,
+      "ads_pct_ex_shein_jwl": 2.82,
+      "ads_pct_ex_shein_rrfb": 1.52,
+      "ads_pct_ex_jwl_rrfb": 3.45,
+      "ads_pct_ex_all": 3.48,
+      "approval_status": {
+        "approved_pkgs": 2,
+        "approved_rev": 0.005,
+        "booked_pkgs": 3,
+        "booked_rev": 0.12,
+        "note": "Apr data primarily from Master Brand Tracker (Package_Details data sparse for Apr)"
+      }
     },
     "May26": {
       "label": "May '26",
-      "ads_rev": 11.061,
+      "ads_rev": 11.059,
       "ads_target": 21.07,
       "ach_pct": 52.5,
       "active_brands": 1328,
-      "total_platform_brands": 9595,
-      "platform_nsv": 524.78,
-      "nsv_type": "projected",
-      "nsv_src": "Master Brand Tracker",
-      "nsv_jewellery": 182.18,
-      "nsv_shein": 1.99,
-      "nsv_rrfb": 68.56,
-      "ads_pct_nsv": 2.11,
-      "ads_pct_ex_jwl": 3.23,
-      "ads_pct_ex_shein": 2.13,
-      "ads_pct_ex_rrfb": 2.42,
-      "ads_pct_ex_shein_jwl": 3.25,
-      "ads_pct_ex_shein_rrfb": 2.44,
-      "ads_pct_ex_jwl_rrfb": 4.07,
-      "ads_pct_ex_all": 4.07,
+      "total_platform_brands": 8551,
+      "platform_nsv": 664.21,
+      "nsv_type": "actual",
+      "nsv_src": "JAS_Master_V9 Sheet1",
+      "nsv_jewellery": 165.51,
+      "nsv_shein": 6.75,
+      "nsv_rrfb": 75.89999999999999,
       "retention": {
-        "m1_brand_pct": 80.6,
+        "m1_brand_pct": 66.7,
         "m1_rev_pct": 122.4,
-        "new_advertiser_pct": 94.3,
+        "new_advertiser_pct": 99.8,
         "new_advertiser_rev": 6.48,
         "new_advertiser_rev_pct": 41.7,
-        "note": "80.6% of Apr brands returned \u00b7 94.3% of May brands were new (FY27 scale-up month)"
+        "note": "66.7% of Apr brands returned \u00b7 Scale-up month"
       },
       "tier": {
         "lcs": {
@@ -434,114 +601,306 @@
         {
           "bu": "Jewellery",
           "total": 337,
-          "active": 45,
-          "rev": 2.96,
-          "target": 2.0
+          "apr_active": 7,
+          "may_active": 46,
+          "jun_active": 37,
+          "apr_rev": 1.569,
+          "may_rev": 3.048,
+          "jun_rev": 0.757,
+          "jun_target": 2.0,
+          "jul_target": 2.72,
+          "aug_target": 2.7,
+          "sep_target": 3.12,
+          "jul_nsv": 181.15,
+          "rev": 3.048,
+          "active": 46,
+          "target": 2.0,
+          "gap": 1.048
         },
         {
           "bu": "RRFB",
           "total": 155,
-          "active": 25,
+          "apr_active": 7,
+          "may_active": 8,
+          "jun_active": 8,
+          "apr_rev": 1.7,
+          "may_rev": 2.2,
+          "jun_rev": 0.82,
+          "jun_target": 4.29,
+          "jul_target": 2.53,
+          "aug_target": 2.9,
+          "sep_target": 3.08,
+          "jul_nsv": 72.26,
           "rev": 2.2,
-          "target": 4.29
-        },
-        {
-          "bu": "Non-Endemic",
-          "total": 16,
-          "active": 3,
-          "rev": 1.7,
-          "target": 0
+          "active": 8,
+          "target": 4.29,
+          "gap": -2.09
         },
         {
           "bu": "Emerging Brands MP",
           "total": 3857,
-          "active": 400,
-          "rev": 1.21,
-          "target": 5.32
-        },
-        {
-          "bu": "Sportswear",
-          "total": 30,
-          "active": 12,
-          "rev": 0.906,
-          "target": 3.56
+          "apr_active": 16,
+          "may_active": 779,
+          "jun_active": 673,
+          "apr_rev": 0.845,
+          "may_rev": 2.083,
+          "jun_rev": 2.081,
+          "jun_target": 5.32,
+          "jul_target": 4.26,
+          "aug_target": 4.54,
+          "sep_target": 5.14,
+          "jul_nsv": 106.49,
+          "rev": 2.083,
+          "active": 779,
+          "target": 5.32,
+          "gap": -3.237
         },
         {
           "bu": "National Brands",
           "total": 83,
-          "active": 38,
-          "rev": 0.492,
-          "target": 2.55
-        },
-        {
-          "bu": "HBLTA",
-          "total": 660,
-          "active": 60,
-          "rev": 0.448,
-          "target": 0.46
+          "apr_active": 8,
+          "may_active": 47,
+          "jun_active": 41,
+          "apr_rev": 1.067,
+          "may_rev": 1.089,
+          "jun_rev": 1.438,
+          "jun_target": 2.55,
+          "jul_target": 1.56,
+          "aug_target": 1.38,
+          "sep_target": 1.44,
+          "jul_nsv": 39.06,
+          "rev": 1.089,
+          "active": 47,
+          "target": 2.55,
+          "gap": -1.461
         },
         {
           "bu": "QPL",
           "total": 12,
-          "active": 8,
-          "rev": 0.394,
-          "target": 0.78
-        },
-        {
-          "bu": "Gold Non RBL",
-          "total": 36,
-          "active": 9,
-          "rev": 0.26,
-          "target": 0.75
+          "apr_active": 5,
+          "may_active": 7,
+          "jun_active": 8,
+          "apr_rev": 0.649,
+          "may_rev": 0.964,
+          "jun_rev": 0.702,
+          "jun_target": 0.78,
+          "jul_target": 0.68,
+          "aug_target": 0.74,
+          "sep_target": 0.78,
+          "jul_nsv": 22.59,
+          "rev": 0.964,
+          "active": 7,
+          "target": 0.78,
+          "gap": 0.184
         },
         {
           "bu": "Kids",
           "total": 1114,
-          "active": 48,
-          "rev": 0.178,
-          "target": 1.26
-        },
-        {
-          "bu": "Ajiogram",
-          "total": 280,
-          "active": 22,
-          "rev": 0.14,
-          "target": 0.89
-        },
-        {
-          "bu": "IW&LW",
-          "total": 718,
-          "active": 42,
-          "rev": 0.123,
-          "target": 0.64
-        },
-        {
-          "bu": "Beauty",
-          "total": 680,
-          "active": 30,
-          "rev": 0.088,
-          "target": 1.63
-        },
-        {
-          "bu": "Watches & SG",
-          "total": 268,
-          "active": 18,
-          "rev": 0.09,
-          "target": 1.8
+          "apr_active": 4,
+          "may_active": 132,
+          "jun_active": 92,
+          "apr_rev": 0.23,
+          "may_rev": 0.591,
+          "jun_rev": 0.648,
+          "jun_target": 1.26,
+          "jul_target": 0.95,
+          "aug_target": 0.96,
+          "sep_target": 1.17,
+          "jul_nsv": 23.83,
+          "rev": 0.591,
+          "active": 132,
+          "target": 1.26,
+          "gap": -0.669
         },
         {
           "bu": "Gold RBL",
           "total": 54,
-          "active": 4,
-          "rev": 0.013,
-          "target": 1.03
+          "apr_active": 10,
+          "may_active": 16,
+          "jun_active": 11,
+          "apr_rev": 0.412,
+          "may_rev": 0.561,
+          "jun_rev": 0.785,
+          "jun_target": 1.03,
+          "jul_target": 0.78,
+          "aug_target": 0.69,
+          "sep_target": 0.74,
+          "jul_nsv": 25.99,
+          "rev": 0.561,
+          "active": 16,
+          "target": 1.03,
+          "gap": -0.469
+        },
+        {
+          "bu": "HBLTA",
+          "total": 660,
+          "apr_active": 6,
+          "may_active": 72,
+          "jun_active": 80,
+          "apr_rev": 0.147,
+          "may_rev": 0.436,
+          "jun_rev": 0.108,
+          "jun_target": 0.46,
+          "jul_target": 0.37,
+          "aug_target": 0.43,
+          "sep_target": 0.49,
+          "jul_nsv": 9.33,
+          "rev": 0.436,
+          "active": 72,
+          "target": 0.46,
+          "gap": -0.024
+        },
+        {
+          "bu": "Gold Non RBL",
+          "total": 36,
+          "apr_active": 13,
+          "may_active": 16,
+          "jun_active": 15,
+          "apr_rev": 0.28,
+          "may_rev": 0.387,
+          "jun_rev": 0.607,
+          "jun_target": 0.75,
+          "jul_target": 0.52,
+          "aug_target": 0.52,
+          "sep_target": 0.58,
+          "jul_nsv": 13.12,
+          "rev": 0.387,
+          "active": 16,
+          "target": 0.75,
+          "gap": -0.363
+        },
+        {
+          "bu": "Ajiogram",
+          "total": 280,
+          "apr_active": 4,
+          "may_active": 56,
+          "jun_active": 33,
+          "apr_rev": 0.224,
+          "may_rev": 0.381,
+          "jun_rev": 0.418,
+          "jun_target": 0.89,
+          "jul_target": 0.7,
+          "aug_target": 0.7,
+          "sep_target": 0.85,
+          "jul_nsv": 17.62,
+          "rev": 0.381,
+          "active": 56,
+          "target": 0.89,
+          "gap": -0.509
+        },
+        {
+          "bu": "IW&LW",
+          "total": 718,
+          "apr_active": 1,
+          "may_active": 133,
+          "jun_active": 97,
+          "apr_rev": 0.1,
+          "may_rev": 0.204,
+          "jun_rev": 0.329,
+          "jun_target": 0.64,
+          "jul_target": 0.46,
+          "aug_target": 0.47,
+          "sep_target": 0.59,
+          "jul_nsv": 11.5,
+          "rev": 0.204,
+          "active": 133,
+          "target": 0.64,
+          "gap": -0.436
+        },
+        {
+          "bu": "Watches & SG",
+          "total": 268,
+          "apr_active": 3,
+          "may_active": 22,
+          "jun_active": 20,
+          "apr_rev": 0.054,
+          "may_rev": 0.148,
+          "jun_rev": 0.063,
+          "jun_target": 1.8,
+          "jul_target": 1.35,
+          "aug_target": 1.31,
+          "sep_target": 1.5,
+          "jul_nsv": 30.26,
+          "rev": 0.148,
+          "active": 22,
+          "target": 1.8,
+          "gap": -1.652
+        },
+        {
+          "bu": "Beauty",
+          "total": 680,
+          "apr_active": 4,
+          "may_active": 88,
+          "jun_active": 59,
+          "apr_rev": 0.075,
+          "may_rev": 0.127,
+          "jun_rev": 0.119,
+          "jun_target": 1.63,
+          "jul_target": 1.5,
+          "aug_target": 1.79,
+          "sep_target": 2.42,
+          "jul_nsv": 30.0,
+          "rev": 0.127,
+          "active": 88,
+          "target": 1.63,
+          "gap": -1.503
+        },
+        {
+          "bu": "Shein",
+          "total": 1,
+          "apr_active": 1,
+          "may_active": 1,
+          "jun_active": 0,
+          "apr_rev": 0.1,
+          "may_rev": 0.1,
+          "jun_rev": 0.0,
+          "jun_target": 0.36,
+          "jul_target": 0.25,
+          "aug_target": 0.35,
+          "sep_target": 0.38,
+          "jul_nsv": 8.96,
+          "rev": 0.1,
+          "active": 1,
+          "target": 0.36,
+          "gap": -0.26
+        },
+        {
+          "bu": "Home",
+          "total": 420,
+          "apr_active": 3,
+          "may_active": 54,
+          "jun_active": 41,
+          "apr_rev": 0.01,
+          "may_rev": 0.035,
+          "jun_rev": 0.06,
+          "jun_target": 0.3,
+          "jul_target": 0.24,
+          "aug_target": 0.29,
+          "sep_target": 0.33,
+          "jul_nsv": 5.9,
+          "rev": 0.035,
+          "active": 54,
+          "target": 0.3,
+          "gap": -0.265
         },
         {
           "bu": "AJIO LUXE",
           "total": 413,
-          "active": 8,
+          "apr_active": 0,
+          "may_active": 10,
+          "jun_active": 16,
+          "apr_rev": 0.0,
+          "may_rev": 0.022,
+          "jun_rev": 0.812,
+          "jun_target": 1.47,
+          "jul_target": 1.13,
+          "aug_target": 1.07,
+          "sep_target": 1.21,
+          "jul_nsv": 33.22,
           "rev": 0.022,
-          "target": 1.47
+          "active": 10,
+          "target": 1.47,
+          "gap": -1.448
         }
       ],
       "non_endemic": [
@@ -557,36 +916,46 @@
           "objective": "Display \u00b7 agency network",
           "status": "Closed"
         }
-      ]
+      ],
+      "ads_pct_nsv": 1.66,
+      "ads_pct_ex_jwl": 2.22,
+      "ads_pct_ex_shein": 1.68,
+      "ads_pct_ex_rrfb": 1.88,
+      "ads_pct_ex_shein_jwl": 2.25,
+      "ads_pct_ex_shein_rrfb": 1.9,
+      "ads_pct_ex_jwl_rrfb": 2.62,
+      "ads_pct_ex_all": 2.66,
+      "approval_status": {
+        "approved_pkgs": 2391,
+        "approved_rev": 10.372,
+        "booked_pkgs": 12,
+        "booked_rev": 0.687,
+        "rejected_pkgs": 3,
+        "rejected_rev": 0.002,
+        "approved_pct": 93.8,
+        "note": "Month closed \u00b7 93.8% of revenue approved \u00b7 \u20b90.002 Cr rejected (excluded from total)"
+      }
     },
     "Jun26": {
       "label": "Jun '26",
       "ads_rev": 9.833,
       "ads_target": 31.31,
       "ach_pct": 31.4,
-      "active_brands": 1382,
-      "total_platform_brands": 9595,
-      "platform_nsv": 823.0,
-      "nsv_type": "target",
-      "nsv_src": "AOP (Review Deck)",
-      "nsv_jewellery": 200.0,
-      "nsv_shein": 2.0,
-      "nsv_rrfb": 95.0,
-      "ads_pct_nsv": 1.19,
-      "ads_pct_ex_jwl": 1.58,
-      "ads_pct_ex_shein": 1.2,
-      "ads_pct_ex_rrfb": 1.35,
-      "ads_pct_ex_shein_jwl": 1.59,
-      "ads_pct_ex_shein_rrfb": 1.36,
-      "ads_pct_ex_jwl_rrfb": 1.74,
-      "ads_pct_ex_all": 1.87,
+      "active_brands": 2320,
+      "total_platform_brands": 8551,
+      "platform_nsv": 823.4,
+      "nsv_type": "actual",
+      "nsv_src": "JAS_Master_V9 Sheet1",
+      "nsv_jewellery": 200.12,
+      "nsv_shein": 10.95,
+      "nsv_rrfb": 95.26,
       "retention": {
         "m1_brand_pct": 81.9,
         "m1_rev_pct": 110.1,
         "new_advertiser_pct": 21.3,
         "new_advertiser_rev": 4.045,
         "new_advertiser_rev_pct": 41.1,
-        "note": "81.9% of May brands returned \u00b7 M1 revenue retention strong at 110.1%"
+        "note": "81.9% of May brands returned \u00b7 M1 rev retention: 110.1%"
       },
       "tier": {
         "lcs": {
@@ -714,121 +1083,344 @@
         {
           "bu": "Emerging Brands MP",
           "total": 3857,
-          "active": 673,
+          "apr_active": 16,
+          "may_active": 779,
+          "jun_active": 673,
+          "apr_rev": 0.845,
+          "may_rev": 2.083,
+          "jun_rev": 2.081,
+          "jun_target": 5.32,
+          "jul_target": 4.26,
+          "aug_target": 4.54,
+          "sep_target": 5.14,
+          "jul_nsv": 106.49,
           "rev": 2.081,
-          "target": 5.32
+          "active": 673,
+          "target": 5.32,
+          "gap": -3.239
         },
         {
           "bu": "National Brands",
           "total": 83,
-          "active": 41,
+          "apr_active": 8,
+          "may_active": 47,
+          "jun_active": 41,
+          "apr_rev": 1.067,
+          "may_rev": 1.089,
+          "jun_rev": 1.438,
+          "jun_target": 2.55,
+          "jul_target": 1.56,
+          "aug_target": 1.38,
+          "sep_target": 1.44,
+          "jul_nsv": 39.06,
           "rev": 1.438,
-          "target": 2.55
-        },
-        {
-          "bu": "AJIO LUXE",
-          "total": 413,
-          "active": 16,
-          "rev": 0.812,
-          "target": 1.47
+          "active": 41,
+          "target": 2.55,
+          "gap": -1.112
         },
         {
           "bu": "RRFB",
           "total": 155,
-          "active": 8,
+          "apr_active": 7,
+          "may_active": 8,
+          "jun_active": 8,
+          "apr_rev": 1.7,
+          "may_rev": 2.2,
+          "jun_rev": 0.82,
+          "jun_target": 4.29,
+          "jul_target": 2.53,
+          "aug_target": 2.9,
+          "sep_target": 3.08,
+          "jul_nsv": 72.26,
           "rev": 0.82,
-          "target": 4.29
+          "active": 8,
+          "target": 4.29,
+          "gap": -3.47
+        },
+        {
+          "bu": "AJIO LUXE",
+          "total": 413,
+          "apr_active": 0,
+          "may_active": 10,
+          "jun_active": 16,
+          "apr_rev": 0.0,
+          "may_rev": 0.022,
+          "jun_rev": 0.812,
+          "jun_target": 1.47,
+          "jul_target": 1.13,
+          "aug_target": 1.07,
+          "sep_target": 1.21,
+          "jul_nsv": 33.22,
+          "rev": 0.812,
+          "active": 16,
+          "target": 1.47,
+          "gap": -0.658
         },
         {
           "bu": "Gold RBL",
           "total": 54,
-          "active": 11,
+          "apr_active": 10,
+          "may_active": 16,
+          "jun_active": 11,
+          "apr_rev": 0.412,
+          "may_rev": 0.561,
+          "jun_rev": 0.785,
+          "jun_target": 1.03,
+          "jul_target": 0.78,
+          "aug_target": 0.69,
+          "sep_target": 0.74,
+          "jul_nsv": 25.99,
           "rev": 0.785,
-          "target": 1.03
+          "active": 11,
+          "target": 1.03,
+          "gap": -0.245
         },
         {
           "bu": "Jewellery",
           "total": 337,
-          "active": 37,
+          "apr_active": 7,
+          "may_active": 46,
+          "jun_active": 37,
+          "apr_rev": 1.569,
+          "may_rev": 3.048,
+          "jun_rev": 0.757,
+          "jun_target": 2.0,
+          "jul_target": 2.72,
+          "aug_target": 2.7,
+          "sep_target": 3.12,
+          "jul_nsv": 181.15,
           "rev": 0.757,
-          "target": 2.0
+          "active": 37,
+          "target": 2.0,
+          "gap": -1.243
         },
         {
           "bu": "QPL",
           "total": 12,
-          "active": 8,
+          "apr_active": 5,
+          "may_active": 7,
+          "jun_active": 8,
+          "apr_rev": 0.649,
+          "may_rev": 0.964,
+          "jun_rev": 0.702,
+          "jun_target": 0.78,
+          "jul_target": 0.68,
+          "aug_target": 0.74,
+          "sep_target": 0.78,
+          "jul_nsv": 22.59,
           "rev": 0.702,
-          "target": 0.78
-        },
-        {
-          "bu": "Gold Non RBL",
-          "total": 36,
-          "active": 15,
-          "rev": 0.607,
-          "target": 0.75
+          "active": 8,
+          "target": 0.78,
+          "gap": -0.078
         },
         {
           "bu": "Kids",
           "total": 1114,
-          "active": 92,
+          "apr_active": 4,
+          "may_active": 132,
+          "jun_active": 92,
+          "apr_rev": 0.23,
+          "may_rev": 0.591,
+          "jun_rev": 0.648,
+          "jun_target": 1.26,
+          "jul_target": 0.95,
+          "aug_target": 0.96,
+          "sep_target": 1.17,
+          "jul_nsv": 23.83,
           "rev": 0.648,
-          "target": 1.26
+          "active": 92,
+          "target": 1.26,
+          "gap": -0.612
+        },
+        {
+          "bu": "Gold Non RBL",
+          "total": 36,
+          "apr_active": 13,
+          "may_active": 16,
+          "jun_active": 15,
+          "apr_rev": 0.28,
+          "may_rev": 0.387,
+          "jun_rev": 0.607,
+          "jun_target": 0.75,
+          "jul_target": 0.52,
+          "aug_target": 0.52,
+          "sep_target": 0.58,
+          "jul_nsv": 13.12,
+          "rev": 0.607,
+          "active": 15,
+          "target": 0.75,
+          "gap": -0.143
         },
         {
           "bu": "Ajiogram",
           "total": 280,
-          "active": 33,
+          "apr_active": 4,
+          "may_active": 56,
+          "jun_active": 33,
+          "apr_rev": 0.224,
+          "may_rev": 0.381,
+          "jun_rev": 0.418,
+          "jun_target": 0.89,
+          "jul_target": 0.7,
+          "aug_target": 0.7,
+          "sep_target": 0.85,
+          "jul_nsv": 17.62,
           "rev": 0.418,
-          "target": 0.89
-        },
-        {
-          "bu": "Emerging Brands PL",
-          "total": 5,
-          "active": 5,
-          "rev": 0.4,
-          "target": 0.5
+          "active": 33,
+          "target": 0.89,
+          "gap": -0.472
         },
         {
           "bu": "IW&LW",
           "total": 718,
-          "active": 97,
+          "apr_active": 1,
+          "may_active": 133,
+          "jun_active": 97,
+          "apr_rev": 0.1,
+          "may_rev": 0.204,
+          "jun_rev": 0.329,
+          "jun_target": 0.64,
+          "jul_target": 0.46,
+          "aug_target": 0.47,
+          "sep_target": 0.59,
+          "jul_nsv": 11.5,
           "rev": 0.329,
-          "target": 0.64
-        },
-        {
-          "bu": "Sportswear",
-          "total": 30,
-          "active": 8,
-          "rev": 0.247,
-          "target": 3.56
+          "active": 97,
+          "target": 0.64,
+          "gap": -0.311
         },
         {
           "bu": "Beauty",
           "total": 680,
-          "active": 59,
+          "apr_active": 4,
+          "may_active": 88,
+          "jun_active": 59,
+          "apr_rev": 0.075,
+          "may_rev": 0.127,
+          "jun_rev": 0.119,
+          "jun_target": 1.63,
+          "jul_target": 1.5,
+          "aug_target": 1.79,
+          "sep_target": 2.42,
+          "jul_nsv": 30.0,
           "rev": 0.119,
-          "target": 1.63
+          "active": 59,
+          "target": 1.63,
+          "gap": -1.511
         },
         {
           "bu": "HBLTA",
           "total": 660,
-          "active": 80,
+          "apr_active": 6,
+          "may_active": 72,
+          "jun_active": 80,
+          "apr_rev": 0.147,
+          "may_rev": 0.436,
+          "jun_rev": 0.108,
+          "jun_target": 0.46,
+          "jul_target": 0.37,
+          "aug_target": 0.43,
+          "sep_target": 0.49,
+          "jul_nsv": 9.33,
           "rev": 0.108,
-          "target": 0.46
+          "active": 80,
+          "target": 0.46,
+          "gap": -0.352
         },
         {
           "bu": "Watches & SG",
           "total": 268,
-          "active": 20,
+          "apr_active": 3,
+          "may_active": 22,
+          "jun_active": 20,
+          "apr_rev": 0.054,
+          "may_rev": 0.148,
+          "jun_rev": 0.063,
+          "jun_target": 1.8,
+          "jul_target": 1.35,
+          "aug_target": 1.31,
+          "sep_target": 1.5,
+          "jul_nsv": 30.26,
           "rev": 0.063,
-          "target": 1.8
+          "active": 20,
+          "target": 1.8,
+          "gap": -1.737
         },
         {
           "bu": "Home",
           "total": 420,
-          "active": 41,
+          "apr_active": 3,
+          "may_active": 54,
+          "jun_active": 41,
+          "apr_rev": 0.01,
+          "may_rev": 0.035,
+          "jun_rev": 0.06,
+          "jun_target": 0.3,
+          "jul_target": 0.24,
+          "aug_target": 0.29,
+          "sep_target": 0.33,
+          "jul_nsv": 5.9,
           "rev": 0.06,
-          "target": 0.3
+          "active": 41,
+          "target": 0.3,
+          "gap": -0.24
+        },
+        {
+          "bu": "Sportswear",
+          "total": 0,
+          "apr_active": 0,
+          "may_active": 0,
+          "jun_active": 0,
+          "apr_rev": 0.0,
+          "may_rev": 0.0,
+          "jun_rev": 0.0,
+          "jun_target": 3.56,
+          "jul_target": 1.93,
+          "aug_target": 2.16,
+          "sep_target": 2.15,
+          "jul_nsv": 48.17,
+          "rev": 0.0,
+          "active": 0,
+          "target": 3.56,
+          "gap": -3.56
+        },
+        {
+          "bu": "Emerging Brands PL",
+          "total": 0,
+          "apr_active": 0,
+          "may_active": 0,
+          "jun_active": 0,
+          "apr_rev": 0.0,
+          "may_rev": 0.0,
+          "jun_rev": 0.0,
+          "jun_target": 0.5,
+          "jul_target": 0.51,
+          "aug_target": 0.63,
+          "sep_target": 0.71,
+          "jul_nsv": 17.04,
+          "rev": 0.0,
+          "active": 0,
+          "target": 0.5,
+          "gap": -0.5
+        },
+        {
+          "bu": "Shein",
+          "total": 1,
+          "apr_active": 1,
+          "may_active": 1,
+          "jun_active": 0,
+          "apr_rev": 0.1,
+          "may_rev": 0.1,
+          "jun_rev": 0.0,
+          "jun_target": 0.36,
+          "jul_target": 0.25,
+          "aug_target": 0.35,
+          "sep_target": 0.38,
+          "jul_nsv": 8.96,
+          "rev": 0.0,
+          "active": 0,
+          "target": 0.36,
+          "gap": -0.36
         }
       ],
       "non_endemic": [
@@ -844,15 +1436,762 @@
           "objective": "Brand awareness \u00b7 continuation",
           "status": "Pipeline"
         }
-      ]
+      ],
+      "ads_pct_nsv": 1.19,
+      "ads_pct_ex_jwl": 1.58,
+      "ads_pct_ex_shein": 1.21,
+      "ads_pct_ex_rrfb": 1.35,
+      "ads_pct_ex_shein_jwl": 1.61,
+      "ads_pct_ex_shein_rrfb": 1.37,
+      "ads_pct_ex_jwl_rrfb": 1.86,
+      "ads_pct_ex_all": 1.9,
+      "approval_status": {
+        "approved_pkgs": 383,
+        "approved_rev": 5.913,
+        "booked_pkgs": 1244,
+        "booked_rev": 3.92,
+        "rejected_pkgs": 0,
+        "rejected_rev": 0,
+        "approved_pct": 60.1,
+        "note": "60.1% of revenue approved \u00b7 \u20b93.92 Cr still pending approval (revenue recognition risk)"
+      }
+    },
+    "Jul26": {
+      "label": "Jul '26",
+      "ads_rev": 0,
+      "ads_target": 24.27,
+      "ach_pct": 0,
+      "active_brands": 0,
+      "total_platform_brands": 8551,
+      "platform_nsv": 714.14,
+      "nsv_type": "target",
+      "nsv_src": "JAS AOP Plan",
+      "nsv_jewellery": 181.15,
+      "nsv_shein": 8.96,
+      "nsv_rrfb": 85.51,
+      "ads_pct_nsv": 0.0,
+      "ads_pct_ex_jwl": 0.0,
+      "ads_pct_ex_shein": 0.0,
+      "ads_pct_ex_rrfb": 0.0,
+      "ads_pct_ex_shein_jwl": 0.0,
+      "ads_pct_ex_shein_rrfb": 0.0,
+      "ads_pct_ex_jwl_rrfb": 0.0,
+      "ads_pct_ex_all": 0.0,
+      "retention": null,
+      "tier": {
+        "lcs": {
+          "active": 0,
+          "rev": 0
+        },
+        "growth": {
+          "active": 0,
+          "rev": 0
+        },
+        "longtail": {
+          "active": 0,
+          "rev": 0
+        }
+      },
+      "top_brands": [],
+      "portfolios": [],
+      "non_endemic": [],
+      "bu_split": [
+        {
+          "bu": "Emerging Brands MP",
+          "total": 3857,
+          "active": 0,
+          "rev": 0,
+          "target": 4.26,
+          "jul_target": 4.26
+        },
+        {
+          "bu": "Jewellery",
+          "total": 337,
+          "active": 0,
+          "rev": 0,
+          "target": 2.72,
+          "jul_target": 2.72
+        },
+        {
+          "bu": "RRFB",
+          "total": 155,
+          "active": 0,
+          "rev": 0,
+          "target": 2.53,
+          "jul_target": 2.53
+        },
+        {
+          "bu": "Sportswear",
+          "total": 0,
+          "active": 0,
+          "rev": 0,
+          "target": 1.93,
+          "jul_target": 1.93
+        },
+        {
+          "bu": "National Brands",
+          "total": 83,
+          "active": 0,
+          "rev": 0,
+          "target": 1.56,
+          "jul_target": 1.56
+        },
+        {
+          "bu": "Beauty",
+          "total": 680,
+          "active": 0,
+          "rev": 0,
+          "target": 1.5,
+          "jul_target": 1.5
+        },
+        {
+          "bu": "Watches & SG",
+          "total": 268,
+          "active": 0,
+          "rev": 0,
+          "target": 1.35,
+          "jul_target": 1.35
+        },
+        {
+          "bu": "AJIO LUXE",
+          "total": 413,
+          "active": 0,
+          "rev": 0,
+          "target": 1.13,
+          "jul_target": 1.13
+        },
+        {
+          "bu": "Kids",
+          "total": 1114,
+          "active": 0,
+          "rev": 0,
+          "target": 0.95,
+          "jul_target": 0.95
+        },
+        {
+          "bu": "Gold RBL",
+          "total": 54,
+          "active": 0,
+          "rev": 0,
+          "target": 0.78,
+          "jul_target": 0.78
+        },
+        {
+          "bu": "Ajiogram",
+          "total": 280,
+          "active": 0,
+          "rev": 0,
+          "target": 0.7,
+          "jul_target": 0.7
+        },
+        {
+          "bu": "QPL",
+          "total": 12,
+          "active": 0,
+          "rev": 0,
+          "target": 0.68,
+          "jul_target": 0.68
+        },
+        {
+          "bu": "Gold Non RBL",
+          "total": 36,
+          "active": 0,
+          "rev": 0,
+          "target": 0.52,
+          "jul_target": 0.52
+        },
+        {
+          "bu": "Emerging Brands PL",
+          "total": 0,
+          "active": 0,
+          "rev": 0,
+          "target": 0.51,
+          "jul_target": 0.51
+        },
+        {
+          "bu": "IW&LW",
+          "total": 718,
+          "active": 0,
+          "rev": 0,
+          "target": 0.46,
+          "jul_target": 0.46
+        },
+        {
+          "bu": "HBLTA",
+          "total": 660,
+          "active": 0,
+          "rev": 0,
+          "target": 0.37,
+          "jul_target": 0.37
+        },
+        {
+          "bu": "Shein",
+          "total": 1,
+          "active": 0,
+          "rev": 0,
+          "target": 0.25,
+          "jul_target": 0.25
+        },
+        {
+          "bu": "Home",
+          "total": 420,
+          "active": 0,
+          "rev": 0,
+          "target": 0.24,
+          "jul_target": 0.24
+        }
+      ],
+      "is_future": true
+    },
+    "Aug26": {
+      "label": "Aug '26",
+      "ads_rev": 0,
+      "ads_target": 25.72,
+      "ach_pct": 0,
+      "active_brands": 0,
+      "total_platform_brands": 8551,
+      "platform_nsv": 714.98,
+      "nsv_type": "target",
+      "nsv_src": "JAS AOP Plan",
+      "nsv_jewellery": 179.92,
+      "nsv_shein": 12.5,
+      "nsv_rrfb": 84.67,
+      "ads_pct_nsv": 0.0,
+      "ads_pct_ex_jwl": 0.0,
+      "ads_pct_ex_shein": 0.0,
+      "ads_pct_ex_rrfb": 0.0,
+      "ads_pct_ex_shein_jwl": 0.0,
+      "ads_pct_ex_shein_rrfb": 0.0,
+      "ads_pct_ex_jwl_rrfb": 0.0,
+      "ads_pct_ex_all": 0.0,
+      "retention": null,
+      "tier": {
+        "lcs": {
+          "active": 0,
+          "rev": 0
+        },
+        "growth": {
+          "active": 0,
+          "rev": 0
+        },
+        "longtail": {
+          "active": 0,
+          "rev": 0
+        }
+      },
+      "top_brands": [],
+      "portfolios": [],
+      "non_endemic": [],
+      "bu_split": [
+        {
+          "bu": "Emerging Brands MP",
+          "total": 3857,
+          "active": 0,
+          "rev": 0,
+          "target": 4.54,
+          "jul_target": 4.54
+        },
+        {
+          "bu": "RRFB",
+          "total": 155,
+          "active": 0,
+          "rev": 0,
+          "target": 2.9,
+          "jul_target": 2.9
+        },
+        {
+          "bu": "Jewellery",
+          "total": 337,
+          "active": 0,
+          "rev": 0,
+          "target": 2.7,
+          "jul_target": 2.7
+        },
+        {
+          "bu": "Sportswear",
+          "total": 0,
+          "active": 0,
+          "rev": 0,
+          "target": 2.16,
+          "jul_target": 2.16
+        },
+        {
+          "bu": "Beauty",
+          "total": 680,
+          "active": 0,
+          "rev": 0,
+          "target": 1.79,
+          "jul_target": 1.79
+        },
+        {
+          "bu": "National Brands",
+          "total": 83,
+          "active": 0,
+          "rev": 0,
+          "target": 1.38,
+          "jul_target": 1.38
+        },
+        {
+          "bu": "Watches & SG",
+          "total": 268,
+          "active": 0,
+          "rev": 0,
+          "target": 1.31,
+          "jul_target": 1.31
+        },
+        {
+          "bu": "AJIO LUXE",
+          "total": 413,
+          "active": 0,
+          "rev": 0,
+          "target": 1.07,
+          "jul_target": 1.07
+        },
+        {
+          "bu": "Kids",
+          "total": 1114,
+          "active": 0,
+          "rev": 0,
+          "target": 0.96,
+          "jul_target": 0.96
+        },
+        {
+          "bu": "QPL",
+          "total": 12,
+          "active": 0,
+          "rev": 0,
+          "target": 0.74,
+          "jul_target": 0.74
+        },
+        {
+          "bu": "Ajiogram",
+          "total": 280,
+          "active": 0,
+          "rev": 0,
+          "target": 0.7,
+          "jul_target": 0.7
+        },
+        {
+          "bu": "Gold RBL",
+          "total": 54,
+          "active": 0,
+          "rev": 0,
+          "target": 0.69,
+          "jul_target": 0.69
+        },
+        {
+          "bu": "Emerging Brands PL",
+          "total": 0,
+          "active": 0,
+          "rev": 0,
+          "target": 0.63,
+          "jul_target": 0.63
+        },
+        {
+          "bu": "Gold Non RBL",
+          "total": 36,
+          "active": 0,
+          "rev": 0,
+          "target": 0.52,
+          "jul_target": 0.52
+        },
+        {
+          "bu": "IW&LW",
+          "total": 718,
+          "active": 0,
+          "rev": 0,
+          "target": 0.47,
+          "jul_target": 0.47
+        },
+        {
+          "bu": "HBLTA",
+          "total": 660,
+          "active": 0,
+          "rev": 0,
+          "target": 0.43,
+          "jul_target": 0.43
+        },
+        {
+          "bu": "Shein",
+          "total": 1,
+          "active": 0,
+          "rev": 0,
+          "target": 0.35,
+          "jul_target": 0.35
+        },
+        {
+          "bu": "Home",
+          "total": 420,
+          "active": 0,
+          "rev": 0,
+          "target": 0.29,
+          "jul_target": 0.29
+        }
+      ],
+      "is_future": true
+    },
+    "Sep26": {
+      "label": "Sep '26",
+      "ads_rev": 0,
+      "ads_target": 29.8,
+      "ach_pct": 0,
+      "active_brands": 0,
+      "total_platform_brands": 8551,
+      "platform_nsv": 774.15,
+      "nsv_type": "target",
+      "nsv_src": "JAS AOP Plan",
+      "nsv_jewellery": 208.11,
+      "nsv_shein": 12.69,
+      "nsv_rrfb": 92.92,
+      "ads_pct_nsv": 0.0,
+      "ads_pct_ex_jwl": 0.0,
+      "ads_pct_ex_shein": 0.0,
+      "ads_pct_ex_rrfb": 0.0,
+      "ads_pct_ex_shein_jwl": 0.0,
+      "ads_pct_ex_shein_rrfb": 0.0,
+      "ads_pct_ex_jwl_rrfb": 0.0,
+      "ads_pct_ex_all": 0.0,
+      "retention": null,
+      "tier": {
+        "lcs": {
+          "active": 0,
+          "rev": 0
+        },
+        "growth": {
+          "active": 0,
+          "rev": 0
+        },
+        "longtail": {
+          "active": 0,
+          "rev": 0
+        }
+      },
+      "top_brands": [],
+      "portfolios": [],
+      "non_endemic": [],
+      "bu_split": [
+        {
+          "bu": "Emerging Brands MP",
+          "total": 3857,
+          "active": 0,
+          "rev": 0,
+          "target": 5.14,
+          "jul_target": 5.14
+        },
+        {
+          "bu": "Jewellery",
+          "total": 337,
+          "active": 0,
+          "rev": 0,
+          "target": 3.12,
+          "jul_target": 3.12
+        },
+        {
+          "bu": "RRFB",
+          "total": 155,
+          "active": 0,
+          "rev": 0,
+          "target": 3.08,
+          "jul_target": 3.08
+        },
+        {
+          "bu": "Beauty",
+          "total": 680,
+          "active": 0,
+          "rev": 0,
+          "target": 2.42,
+          "jul_target": 2.42
+        },
+        {
+          "bu": "Sportswear",
+          "total": 0,
+          "active": 0,
+          "rev": 0,
+          "target": 2.15,
+          "jul_target": 2.15
+        },
+        {
+          "bu": "Watches & SG",
+          "total": 268,
+          "active": 0,
+          "rev": 0,
+          "target": 1.5,
+          "jul_target": 1.5
+        },
+        {
+          "bu": "National Brands",
+          "total": 83,
+          "active": 0,
+          "rev": 0,
+          "target": 1.44,
+          "jul_target": 1.44
+        },
+        {
+          "bu": "AJIO LUXE",
+          "total": 413,
+          "active": 0,
+          "rev": 0,
+          "target": 1.21,
+          "jul_target": 1.21
+        },
+        {
+          "bu": "Kids",
+          "total": 1114,
+          "active": 0,
+          "rev": 0,
+          "target": 1.17,
+          "jul_target": 1.17
+        },
+        {
+          "bu": "Ajiogram",
+          "total": 280,
+          "active": 0,
+          "rev": 0,
+          "target": 0.85,
+          "jul_target": 0.85
+        },
+        {
+          "bu": "QPL",
+          "total": 12,
+          "active": 0,
+          "rev": 0,
+          "target": 0.78,
+          "jul_target": 0.78
+        },
+        {
+          "bu": "Gold RBL",
+          "total": 54,
+          "active": 0,
+          "rev": 0,
+          "target": 0.74,
+          "jul_target": 0.74
+        },
+        {
+          "bu": "Emerging Brands PL",
+          "total": 0,
+          "active": 0,
+          "rev": 0,
+          "target": 0.71,
+          "jul_target": 0.71
+        },
+        {
+          "bu": "IW&LW",
+          "total": 718,
+          "active": 0,
+          "rev": 0,
+          "target": 0.59,
+          "jul_target": 0.59
+        },
+        {
+          "bu": "Gold Non RBL",
+          "total": 36,
+          "active": 0,
+          "rev": 0,
+          "target": 0.58,
+          "jul_target": 0.58
+        },
+        {
+          "bu": "HBLTA",
+          "total": 660,
+          "active": 0,
+          "rev": 0,
+          "target": 0.49,
+          "jul_target": 0.49
+        },
+        {
+          "bu": "Shein",
+          "total": 1,
+          "active": 0,
+          "rev": 0,
+          "target": 0.38,
+          "jul_target": 0.38
+        },
+        {
+          "bu": "Home",
+          "total": 420,
+          "active": 0,
+          "rev": 0,
+          "target": 0.33,
+          "jul_target": 0.33
+        }
+      ],
+      "is_future": true
     }
   },
   "ytd": {
-    "q1_target": 69.43,
-    "q1_actual": 28.815,
-    "q1_ach_pct": 41.5,
+    "q1_target": 69.03,
+    "q1_actual": 28.813,
+    "q1_ach_pct": 41.7,
     "fy27_annual_target": 443.7,
     "fy26_q1_actual": 27.24,
-    "yoy_pct": 5.8
+    "yoy_pct": 5.8,
+    "jas_targets": {
+      "jul": 24.27,
+      "aug": 25.72,
+      "sep": 29.8,
+      "jas_total": 79.79
+    }
+  },
+  "unlocks": [
+    {
+      "brand": "GAP",
+      "bu": "GOLD-Non RBL",
+      "nsv": 2.706,
+      "monet": 0.144,
+      "issue": "No TOT"
+    },
+    {
+      "brand": "DECATHLON",
+      "bu": "Sportswear",
+      "nsv": 2.679,
+      "monet": 0.036,
+      "issue": "Scale up"
+    },
+    {
+      "brand": "GUESS",
+      "bu": "GOLD-Non RBL",
+      "nsv": 2.102,
+      "monet": 0.044,
+      "issue": "Revise TOT"
+    },
+    {
+      "brand": "KIANA HOUSE OF FASHION",
+      "bu": "Emerging Brands-MP",
+      "nsv": 1.118,
+      "monet": 0.027,
+      "issue": "Scale up"
+    },
+    {
+      "brand": "THE BEAR HOUSE",
+      "bu": "Emerging Brands-MP",
+      "nsv": 1.097,
+      "monet": 0.032,
+      "issue": "Inventory Issue"
+    },
+    {
+      "brand": "OLD NAVY",
+      "bu": "GOLD-Non RBL",
+      "nsv": 1.072,
+      "monet": 0.045,
+      "issue": "No TOT"
+    },
+    {
+      "brand": "BRITISH CLUB",
+      "bu": "Emerging Brands-MP",
+      "nsv": 1.009,
+      "monet": 0.0,
+      "issue": "Inventory Issue"
+    },
+    {
+      "brand": "HIGHLANDER",
+      "bu": "Emerging Brands-MP",
+      "nsv": 0.874,
+      "monet": 0.022,
+      "issue": "Scale up"
+    },
+    {
+      "brand": "GULMOHAR JAIPUR",
+      "bu": "Emerging Brands-MP",
+      "nsv": 0.676,
+      "monet": 0.027,
+      "issue": "Scale up"
+    },
+    {
+      "brand": "BIBA",
+      "bu": "National Brands",
+      "nsv": 0.669,
+      "monet": 0.042,
+      "issue": "Inventory Issue"
+    },
+    {
+      "brand": "THE SOULED STORE",
+      "bu": "AJIOGRAM",
+      "nsv": 0.655,
+      "monet": 0.042,
+      "issue": "No TOT"
+    },
+    {
+      "brand": "ADIDAS KIDS",
+      "bu": "Kids",
+      "nsv": 0.615,
+      "monet": 0.0,
+      "issue": "High Margin"
+    },
+    {
+      "brand": "EYEBOGLER",
+      "bu": "Emerging Brands-MP",
+      "nsv": 0.61,
+      "monet": 0.013,
+      "issue": "Scale up"
+    },
+    {
+      "brand": "CRAZYMONK",
+      "bu": "AJIOGRAM",
+      "nsv": 0.562,
+      "monet": 0.039,
+      "issue": "No TOT"
+    },
+    {
+      "brand": "TROMKO",
+      "bu": "AJIOGRAM",
+      "nsv": 0.518,
+      "monet": 0.0,
+      "issue": "No TOT"
+    }
+  ],
+  "flag_summary": {
+    "No TOT": {
+      "count": 123,
+      "nsv": 7.92
+    },
+    "Scale up": {
+      "count": 22,
+      "nsv": 10.91
+    },
+    "Revise TOT": {
+      "count": 2,
+      "nsv": 2.25
+    },
+    "Inventory Issue": {
+      "count": 4,
+      "nsv": 2.87
+    },
+    "High Margin": {
+      "count": 2,
+      "nsv": 0.88
+    },
+    "SPF Issue": {
+      "count": 1,
+      "nsv": 0.72
+    }
+  },
+  "kam_mapping": {
+    "Sarang": [
+      "National Brands",
+      "IW&LW",
+      "Kids"
+    ],
+    "Satish": [
+      "Emerging Brands MP",
+      "Emerging Brands PL",
+      "Ajiogram"
+    ],
+    "Arpit": [
+      "HBLTA",
+      "Watches & SG",
+      "Sportswear",
+      "Jewellery"
+    ],
+    "Niharika": [
+      "Gold RBL",
+      "Gold Non RBL",
+      "QPL"
+    ],
+    "Bhawana": [
+      "Beauty",
+      "Home",
+      "AJIO LUXE",
+      "Shein"
+    ]
   }
 }
